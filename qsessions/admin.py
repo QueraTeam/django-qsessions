@@ -47,7 +47,7 @@ delete_selected.short_description = _('Delete selected sessions')
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
-    list_display = ('ip', 'user', 'is_valid', 'expire_date', 'device')
+    list_display = ('ip', 'user', 'is_valid', 'expire_date', 'device', 'location')
     readonly_fields = (
         'ip', 'user', 'user_agent', 'is_valid', 'expire_date', 'updated_at', 'user_agent', 'device',
         'session_key', 'session_data_decoded')

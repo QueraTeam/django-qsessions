@@ -5,6 +5,8 @@ from django.db import models
 
 from importlib import import_module
 
+from qsessions.utils import ip_to_location
+
 
 class SessionManager(BaseSessionManager):
     use_in_migrations = True
@@ -37,3 +39,6 @@ class Session(AbstractBaseSession):
         r = super(Session, self).delete(*args, **kwargs)
         session.delete()
         return r
+
+    def location(self):
+        return ip_to_location(self.ip)

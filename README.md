@@ -13,3 +13,9 @@ QSessions extends Django's cached_db session backend and Session model to add fo
 3. In `MIDDLEWARE` or `MIDDLEWARE_CLASSES` replace `'django.contrib.sessions.middleware.SessionMiddleware'` with `'qsessions.middleware.SessionMiddleware'`.
 4. Add `SESSION_ENGINE = 'qsessions.backends.cached_db'`.
 5. Run `python manage.py migrate qsessions`.
+
+For enabling location detection using GeoIP2 (`session.location`):
+
+6. `pip install geoip2`
+7. Set `GEOIP_PATH` to a directory for GeoIP2 database.
+8. `python manage.py download_geoip_db` (You can add it to a cron to update DB automatically)
