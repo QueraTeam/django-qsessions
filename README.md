@@ -8,27 +8,8 @@ QSessions extends Django's cached_db session backend and Session model to add fo
 
 ## Installation
 
-
-Full documentation is located in `docs`.
-
-Install:
-
-    pip install git+https://github.com/QueraTeam/django-clamav.git
-    pip install git+ssh://git@gitlab.com/codamooz/django-semanticui.git
-    pip install git+ssh://git@gitlab.com/codamooz/django-qform.git
-
-Add following to INSTALLED_APPS:
-
-```
-INSTALLED_APPS = (
-    ...
-    'django_fsm',
-    'fsm_admin',
-    'django_extensions',
-    'nonefield',
-    'semanticui',
-    'django_clamav',
-    'qform',
-    ...
-)
-```
+1. `pip install git+ssh://git@gitlab.com/codamooz/reusable-libs/django-qsessions.git`
+2. In `INSTALLED_APPS` replace `'django.contrib.sessions'` with `'qsessions'`.
+3. In `MIDDLEWARE` or `MIDDLEWARE_CLASSES` replace `'django.contrib.sessions.middleware.SessionMiddleware'` with `'qsessions.middleware.SessionMiddleware'`.
+4. Add `SESSION_ENGINE = 'qsessions.backends.cached_db'`.
+5. Run `python manage.py migrate qsessions`.
