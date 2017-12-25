@@ -42,19 +42,19 @@ class OwnerFilter(admin.SimpleListFilter):
 def delete_selected(modeladmin, request, queryset):
     for s in queryset.all():
         s.delete()
+
+
 delete_selected.short_description = _('Delete selected sessions')
 
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
     list_display = ('ip', 'user', 'is_valid', 'expire_date', 'device', 'location')
-    readonly_fields = (
-        'ip', 'user', 'user_agent', 'is_valid', 'expire_date', 'updated_at', 'user_agent', 'device',
-        'session_key', 'session_data_decoded')
+    readonly_fields = ('ip', 'location', 'user', 'user_agent', 'is_valid', 'expire_date',
+                       'updated_at', 'user_agent', 'device', 'session_key', 'session_data_decoded')
     list_filter = ExpiredFilter, OwnerFilter
-    fields = (
-        'ip', 'user', 'is_valid', 'expire_date', 'updated_at', 'user_agent', 'device',
-        'session_key', 'session_data_decoded')
+    fields = ('user', 'ip', 'location', 'is_valid', 'expire_date', 'updated_at', 'user_agent',
+              'device', 'session_key', 'session_data_decoded')
     actions = [delete_selected]
 
     def get_search_fields(self, request):
