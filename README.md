@@ -1,5 +1,4 @@
-QSessions
-=========
+# QSessions
 
 QSessions extends Django's cached_db session backend and Session model to add following features:
 
@@ -21,3 +20,10 @@ For enabling location detection using GeoIP2 (`session.location`):
 8. `python manage.py download_geoip_db` (You can add it to a cron to update DB automatically)
 
 For clearing expired sessions from DB, run `python manage.py clearsessions`. It's recommended to add it to a daily cron job.
+
+## Why we don't use `django-user-sessions`?
+
+It has the same functionality, but it's based on `db` backend. We need a cache
+to be able to handle lots of sessions.
+
+We got ideas and some codes from `django-user-sessions`.
