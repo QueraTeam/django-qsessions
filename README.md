@@ -20,8 +20,4 @@ For enabling location detection using GeoIP2 (`session.location`):
 7. Set `GEOIP_PATH` to a directory for GeoIP2 database.
 8. `python manage.py download_geoip_db` (You can add it to a cron to update DB automatically)
 
-For clearing expired sessions from DB:
-
-    python manage.py clearsessions
-
-It's recommended to add it to a daily cron job.
+For clearing expired sessions from DB, run `python manage.py clearsessions`. It's recommended to add it to a daily cron job.
