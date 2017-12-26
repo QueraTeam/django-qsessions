@@ -55,11 +55,13 @@ class SessionAdmin(admin.ModelAdmin):
     list_filter = ExpiredFilter, OwnerFilter
     fields = ('user', 'ip', 'location', 'is_valid', 'expire_date', 'updated_at', 'user_agent',
               'device', 'session_key', 'session_data_decoded')
+    ordering = ('-expire_date', )
     actions = [delete_selected]
 
     def get_search_fields(self, request):
         User = get_user_model()
-        return 'ip', 'user__%s' % getattr(User, 'USERNAME_FIELD', 'username')
+        return 'ip', 'user__%s' % getattr(User, 'USERNAME_FIELD', 'username'),\
+               'user__%s' % getattr(User, 'USERNAME_EMAIL', 'email')
 
     def device(self, obj):
         return str(parse(obj.user_agent)) if obj.user_agent else ''
