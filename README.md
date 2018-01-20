@@ -30,7 +30,7 @@ We got ideas and some codes from [django-user-sessions](https://github.com/Bouke
 
 ## TODO
 
-- Write tests
+- Write tests (for latest Python and Django versions)
 
 Contributions are welcome!
 
