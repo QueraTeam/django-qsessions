@@ -9,11 +9,12 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-qsessions',
-    version='0.1.0',
+    version='0.1.1',
     description='Extends Django\'s cached_db session backend',
     long_description=README,
     author='Mohammad Javad Naderi',
     url='https://github.com/QueraTeam/django-qsessions',
+    download_url='https://pypi.python.org/pypi/django-qsessions',
     license='MIT',
     packages=find_packages(),
     include_package_data=True,

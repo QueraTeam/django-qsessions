@@ -26,13 +26,17 @@ For clearing expired sessions from DB, run `python manage.py clearsessions`. It'
 
 ## Why we don't use `django-user-sessions`?
 
-It has the same functionality, but it's based on `db` backend. We need a cache
-to be able to handle lots of sessions.
+`django-user-sessions` has the same functionality, but it's based on `db` backend. We need a cache
+to improve performance and be able to handle lots of sessions.
 
 We got ideas and some codes from [django-user-sessions](https://github.com/Bouke/django-user-sessions).
 
 ## TODO
 
+- Write better documentation.
+  - Explain how it works (in summary)
+  - Explain how to query sessions based on users, and delete sessions
+  - Add more details to existing documentation.
 - Write tests (for latest Python and Django versions)
 - Performance benchmark (and compare with Django's `cached_db`)
 
