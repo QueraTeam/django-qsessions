@@ -7,7 +7,7 @@ QSessions extends Django's cached_db session backend and Session model to add fo
 
 ## Installation
 
-1. `pip install git+ssh://git@gitlab.com/codamooz/reusable-libs/django-qsessions.git`
+1. `pip install git+https://github.com/QueraTeam/django-qsessions.git`
 2. In `INSTALLED_APPS` replace `'django.contrib.sessions'` with `'qsessions'`.
 3. In `MIDDLEWARE` or `MIDDLEWARE_CLASSES` replace `'django.contrib.sessions.middleware.SessionMiddleware'` with `'qsessions.middleware.SessionMiddleware'`.
 4. Add `SESSION_ENGINE = 'qsessions.backends.cached_db'`.
@@ -26,4 +26,14 @@ For clearing expired sessions from DB, run `python manage.py clearsessions`. It'
 It has the same functionality, but it's based on `db` backend. We need a cache
 to be able to handle lots of sessions.
 
-We got ideas and some codes from `django-user-sessions`.
+We got ideas and some codes from [django-user-sessions](https://github.com/Bouke/django-user-sessions).
+
+## TODO
+
+- Write tests
+
+Contributions are welcome!
+
+## License
+
+MIT
