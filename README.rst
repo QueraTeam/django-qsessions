@@ -5,8 +5,9 @@ Django Qsessions
 django-qsessions is a session backend for Django that extends Django's ``cached_db`` session backend
 and ``Session`` model to add following features:
 
-* Sessions have a foreign key to User
-* Sessions store IP and User Agent
+- Sessions have a foreign key to User
+
+- Sessions store IP and User Agent
 
 Installation
 ============
@@ -26,13 +27,13 @@ using another session backend, you need to migrate sessions manually.
 
 (3) In settings:
 
- - In ``INSTALLED_APPS`` replace ``'django.contrib.sessions'`` with ``'qsessions'``.
+    - In ``INSTALLED_APPS`` replace ``'django.contrib.sessions'`` with ``'qsessions'``.
 
- - In ``MIDDLEWARE`` or ``MIDDLEWARE_CLASSES`` replace
-   ``'django.contrib.sessions.middleware.SessionMiddleware'`` with
-   ``'qsessions.middleware.SessionMiddleware'``.
+    - In ``MIDDLEWARE`` or ``MIDDLEWARE_CLASSES`` replace
+      ``'django.contrib.sessions.middleware.SessionMiddleware'`` with
+      ``'qsessions.middleware.SessionMiddleware'``.
 
- - Add ``SESSION_ENGINE = 'qsessions.backends.cached_db'``.
+    - Add ``SESSION_ENGINE = 'qsessions.backends.cached_db'``.
 
 (4) Run migrations to create ``qsessions.models.Session`` model.
 
@@ -74,10 +75,13 @@ TODO
 ====
 
 - Write better documentation.
-   - Explain how it works (in summary)
-   - Explain how to query sessions based on users, and delete sessions
-   - Add more details to existing documentation.
+
+  - Explain how it works (in summary)
+  - Explain how to query sessions based on users, and delete sessions
+  - Add more details to existing documentation.
+
 - Write tests (for latest Python and Django versions)
+
 - Performance benchmark (and compare with Django's `cached_db`)
 
 Contributions are welcome!
