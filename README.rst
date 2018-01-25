@@ -1,6 +1,4 @@
-================
-Django QSessions
-================
+.. image:: https://user-images.githubusercontent.com/2115303/35397506-ec9eb7f4-0204-11e8-90d9-69ddd5a0e90e.png
 
 .. image:: https://img.shields.io/pypi/v/django-qsessions.svg
    :target: https://pypi.python.org/pypi/django-qsessions/
@@ -89,7 +87,7 @@ TODO
   - Explain how to query sessions based on users, and delete sessions
   - Add more details to existing documentation.
 
-- Write tests (for latest Python and Django versions)
+- Write more tests
 
 - Performance benchmark (and compare with Django's `cached_db`)
 
