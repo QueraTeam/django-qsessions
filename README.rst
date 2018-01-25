@@ -1,4 +1,4 @@
-.. image:: https://user-images.githubusercontent.com/2115303/35397506-ec9eb7f4-0204-11e8-90d9-69ddd5a0e90e.png
+.. image:: https://user-images.githubusercontent.com/2115303/35397912-f00efbb4-0205-11e8-89b5-3d4f585a4588.png
 
 .. image:: https://img.shields.io/pypi/v/django-qsessions.svg
    :target: https://pypi.python.org/pypi/django-qsessions/
@@ -8,6 +8,8 @@
 
 .. image:: https://img.shields.io/github/license/QueraTeam/django-qsessions.svg
    :target: https://github.com/QueraTeam/django-qsessions/blob/master/LICENSE.txt
+
+-------
 
 django-qsessions is a session backend for Django that extends Django's ``cached_db`` session backend
 and ``Session`` model to add following features:
