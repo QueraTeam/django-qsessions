@@ -1,5 +1,5 @@
 ================
-Django Qsessions
+Django QSessions
 ================
 
 django-qsessions is a session backend for Django that extends Django's ``cached_db`` session backend

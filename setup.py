@@ -19,7 +19,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'Django>=1.11.2',
+        'Django>=1.10',
         'user-agents>=1.1.0',
         'django-ipware>=1.1.5',
     ],
