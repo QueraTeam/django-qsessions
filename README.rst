@@ -18,6 +18,42 @@ and ``Session`` model to add following features:
 
 - Sessions store IP and User Agent
 
+
+Comparison
+==========
+
+Here is a brief comparison between Django's session backends (db, cache, cached_db), `django-user-sessions`_, and django-qsessions.
+
++-------------------------+----+--------+-----------+----------------------+------------------+
+|                         | db | cache  | cached_db | django-user-sessions | django-qsessions |
++=========================+====+========+===========+======================+==================+
+| Better Performance      |    | ✔✔     | ✔         |                      | ✔                |
++-------------------------+----+--------+-----------+----------------------+------------------+
+| Persistent              | ✔  |        | ✔         | ✔                    | ✔                |
++-------------------------+----+--------+-----------+----------------------+------------------+
+| Query by User           |    |        |           | ✔                    | ✔                |
++-------------------------+----+--------+-----------+----------------------+------------------+
+| Store IP and User Agent |    |        |           | ✔                    | ✔                |
++-------------------------+----+--------+-----------+----------------------+------------------+
+
+
+
+
+Requirements
+============
+
++----------------+-----------------+
+| Python version | Django versions |
++================+=================+
+| 3.6            | 2.0, 1.11, 1.10 |
++----------------+-----------------+
+| 3.5            | 2.0, 1.11, 1.10 |
++----------------+-----------------+
+| 3.4            | 2.0, 1.11, 1.10 |
++----------------+-----------------+
+| 2.7            | 1.11, 1.10      |
++----------------+-----------------+
+
 Installation
 ============
 
@@ -42,7 +78,7 @@ using another session backend, you need to migrate sessions manually.
       ``'django.contrib.sessions.middleware.SessionMiddleware'`` with
       ``'qsessions.middleware.SessionMiddleware'``.
 
-    - Add ``SESSION_ENGINE = 'qsessions.backends.cached_db'``.
+    - Set ``SESSION_ENGINE`` to ``'qsessions.backends.cached_db'``.
 
 (4) Run migrations to create ``qsessions.models.Session`` model.
 
