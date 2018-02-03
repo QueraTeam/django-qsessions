@@ -1,5 +1,6 @@
 from django.contrib.sessions.base_session import AbstractBaseSession, BaseSessionManager
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 from django.conf import settings
 from django.db import models
 
@@ -19,7 +20,7 @@ class Session(AbstractBaseSession):
     user = models.ForeignKey(getattr(settings, 'AUTH_USER_MODEL', 'auth.User'),
                              null=True, on_delete=models.CASCADE)
     user_agent = models.CharField(null=True, blank=True, max_length=300)
-    # created_at = models.DateTimeField(null=True, auto_now_add=True)
+    created_at = models.DateTimeField()
     updated_at = models.DateTimeField(auto_now=True)
     ip = models.GenericIPAddressField(null=True, blank=True, verbose_name=_('IP'))
 
@@ -29,6 +30,14 @@ class Session(AbstractBaseSession):
     def get_session_store_class(cls):
         from qsessions.backends.cached_db import SessionStore
         return SessionStore
+
+    def save(self, *args, **kwargs):
+        # https://code.djangoproject.com/ticket/17654
+        try:
+            self.created_at = Session.objects.get(pk=self.pk).created_at
+        except Session.DoesNotExist:
+            self.created_at = timezone.now()
+        super(Session, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         """
