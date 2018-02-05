@@ -20,7 +20,7 @@ class Session(AbstractBaseSession):
     user = models.ForeignKey(getattr(settings, 'AUTH_USER_MODEL', 'auth.User'),
                              null=True, on_delete=models.CASCADE)
     user_agent = models.CharField(null=True, blank=True, max_length=300)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(null=True)
     updated_at = models.DateTimeField(auto_now=True)
     ip = models.GenericIPAddressField(null=True, blank=True, verbose_name=_('IP'))
 
