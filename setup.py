@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-qsessions',
-    version='0.1.3',
+    version='0.1.4',
     description='Extends Django\'s cached_db session backend',
     long_description=README,
     author='Mohammad Javad Naderi',
