@@ -14,7 +14,7 @@ class SessionStore(CachedDBStore):
 
     def __init__(self, session_key=None, user_agent=None, ip=None):
         self.modified = False
-        self.user_agent = user_agent[:300] if user_agent else None
+        self.user_agent = user_agent[:300] if user_agent else user_agent
         self.ip = ip
         self.user_id = None
         super(SessionStore, self).__init__(session_key)
