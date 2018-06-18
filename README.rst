@@ -58,7 +58,7 @@ Installation
 ============
 
 Please note that if your system is in production and there are lots of active sessions
-using another session backend, you need to migrate sessions manually.
+using another session backend, you need to migrate them manually. We have no migration script.
 
 (1) First, make sure you've `configured your cache`_. If you have multiple caches defined in
     ``CACHES``, Django will use the default cache. To use another cache, set ``SESSION_CACHE_ALIAS``
@@ -103,8 +103,65 @@ For enabling location detection using GeoIP2 (``session.location``):
 
         python manage.py download_geoip_db
 
-For clearing expired sessions from DB, run ``python manage.py clearsessions``. It's recommended to
-add it to a daily cron job.
+Usage
+=====
+
+django-qsessions has a custom ``Session`` model with following fields:
+``user``, ``user_agent``, ``created_at``, ``updated_at``, ``ip``.
+
+Getting a user's sessions:
+
+.. code-block:: python
+    user.session_set.filter(expire_date__gt=timezone.now())
+
+Deleting a session:
+
+.. code-block:: python
+    # Deletes session from both DB and cache
+    session.delete()
+
+Logout a user:
+
+.. code-block:: python
+    for session in user.session_set.all():
+        session.delete()
+
+
+Session creation time (user login time):
+
+.. code-block:: python
+    >>> session.created_at
+    datetime.datetime(2018, 6, 12, 17, 9, 17, 443909, tzinfo=<UTC>)
+
+
+IP and user agent:
+
+.. code-block:: python
+    >>> session.ip
+    '127.0.0.1'
+    >>> session.user_agent
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'
+
+And if you have configured GeoIP2, you can call ``.location()``:
+
+.. code-block:: python
+    >>> session.location()
+    'Tehran, Iran'
+
+Admin page:
+
+.. image:: https://user-images.githubusercontent.com/2115303/41525284-b0b258b0-72f5-11e8-87f1-8770e0094f4c.png
+
+Caveats
+-------
+
+- Please note that bulk deleting sessions (``user.session_set.all().delete()``) does not properly
+  delete sessions. It only deletes them from database, and they will remain in cache. But
+  calling ``delete`` on a single session deletes it from both DB and cache. Contributions on fixing
+  this are welcome.
+
+- ``session.updated_at`` is not the session's last activity. It's updated each time the session
+  object in DB is saved. (e.g. when user logs in, or when ip, user agent, or session data changes)
 
 Why not ``django-user-sessions``?
 =================================
