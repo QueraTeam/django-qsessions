@@ -185,7 +185,6 @@ TODO
 - Write better documentation.
 
   - Explain how it works (in summary)
-  - Explain how to query sessions based on users, and delete sessions
   - Add more details to existing documentation.
 
 - Write more tests
