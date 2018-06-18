@@ -112,17 +112,20 @@ django-qsessions has a custom ``Session`` model with following fields:
 Getting a user's sessions:
 
 .. code-block:: python
+
     user.session_set.filter(expire_date__gt=timezone.now())
 
 Deleting a session:
 
 .. code-block:: python
+
     # Deletes session from both DB and cache
     session.delete()
 
 Logout a user:
 
 .. code-block:: python
+
     for session in user.session_set.all():
         session.delete()
 
@@ -130,6 +133,7 @@ Logout a user:
 Session creation time (user login time):
 
 .. code-block:: python
+
     >>> session.created_at
     datetime.datetime(2018, 6, 12, 17, 9, 17, 443909, tzinfo=<UTC>)
 
@@ -137,6 +141,7 @@ Session creation time (user login time):
 IP and user agent:
 
 .. code-block:: python
+
     >>> session.ip
     '127.0.0.1'
     >>> session.user_agent
@@ -145,6 +150,7 @@ IP and user agent:
 And if you have configured GeoIP2, you can call ``.location()``:
 
 .. code-block:: python
+
     >>> session.location()
     'Tehran, Iran'
 
