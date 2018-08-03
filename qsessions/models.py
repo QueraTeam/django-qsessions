@@ -19,7 +19,7 @@ class SessionQuerySet(models.QuerySet):
         return r
 
 
-class SessionManager(BaseSessionManager):
+class SessionManager(BaseSessionManager.from_queryset(SessionQuerySet)):
     use_in_migrations = True
 
 
