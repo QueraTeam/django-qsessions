@@ -7,6 +7,7 @@ from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
 from django.utils.timezone import now
+from django.core.cache import cache
 
 from qsessions import IP_SESSION_KEY, USER_AGENT_SESSION_KEY
 from qsessions.backends.cached_db import SessionStore
