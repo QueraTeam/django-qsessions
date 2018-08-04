@@ -181,12 +181,13 @@ class CachedDBSessionStoreTest(TestCase):
         s2.create()
         s3 = SessionStore(session_key='test3', user_agent='TestUA/1.1', ip='127.0.0.1')
         s3.create()
-        self.assertIsNotNone(cache.get('qsessions.q_cached_db' + s1.session_key))
-        self.assertIsNotNone(cache.get('qsessions.q_cached_db' + s2.session_key))
-        self.assertIsNotNone(cache.get('qsessions.q_cached_db' + s3.session_key))
+        self.assertIsNotNone(cache.get(SessionStore.cache_key_prefix + s1.session_key))
+        self.assertIsNotNone(cache.get(SessionStore.cache_key_prefix + s2.session_key))
+        self.assertIsNotNone(cache.get(SessionStore.cache_key_prefix + s3.session_key))
 
         Session.objects.filter(user_agent='Python/2.7').delete()
 
-        self.assertIsNone(cache.get('qsessions.q_cached_db' + s1.session_key))
-        self.assertIsNone(cache.get('qsessions.q_cached_db' + s2.session_key))
-        self.assertIsNotNone(cache.get('qsessions.q_cached_db' + s3.session_key))
+        self.assertIsNone(cache.get(SessionStore.cache_key_prefix + s1.session_key))
+        self.assertIsNone(cache.get(SessionStore.cache_key_prefix + s2.session_key))
+        self.assertIsNotNone(cache.get(SessionStore.cache_key_prefix + s3.session_key))
+
