@@ -7,6 +7,7 @@ from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
 from django.utils.timezone import now
+from django.core.cache import cache
 
 from qsessions import IP_SESSION_KEY, USER_AGENT_SESSION_KEY
 from qsessions.backends.cached_db import SessionStore
@@ -170,3 +171,23 @@ class ClearsessionsCommandTest(TestCase):
                                ip='127.0.0.1')
         call_command('clearsessions')
         self.assertEqual(Session.objects.count(), 0)
+
+
+class CachedDBSessionStoreTest(TestCase):
+    def test_bulk_delete_from_both_cache_and_db(self):
+        s1 = SessionStore(session_key='test1', user_agent='Python/2.7', ip='127.0.0.1')
+        s1.create()
+        s2 = SessionStore(session_key='test2', user_agent='Python/2.7', ip='127.0.0.1')
+        s2.create()
+        s3 = SessionStore(session_key='test3', user_agent='TestUA/1.1', ip='127.0.0.1')
+        s3.create()
+        self.assertIsNotNone(cache.get(SessionStore.cache_key_prefix + s1.session_key))
+        self.assertIsNotNone(cache.get(SessionStore.cache_key_prefix + s2.session_key))
+        self.assertIsNotNone(cache.get(SessionStore.cache_key_prefix + s3.session_key))
+
+        Session.objects.filter(user_agent='Python/2.7').delete()
+
+        self.assertIsNone(cache.get(SessionStore.cache_key_prefix + s1.session_key))
+        self.assertIsNone(cache.get(SessionStore.cache_key_prefix + s2.session_key))
+        self.assertIsNotNone(cache.get(SessionStore.cache_key_prefix + s3.session_key))
+

@@ -9,7 +9,17 @@ from importlib import import_module
 from qsessions.utils import ip_to_location
 
 
-class SessionManager(BaseSessionManager):
+class SessionQuerySet(models.QuerySet):
+    def delete(self):
+        SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
+        sessions = [SessionStore(session_key=obj.session_key) for obj in self]
+        r = super(SessionQuerySet, self).delete()
+        for session in sessions:
+            session.delete()
+        return r
+
+
+class SessionManager(BaseSessionManager.from_queryset(SessionQuerySet)):
     use_in_migrations = True
 
 
