@@ -178,6 +178,16 @@ class ModelTest(TestCase):
         assert loc_info['country_code'] == 'SE'
         assert loc_info['continent_code'] == 'EU'
 
+    def test_device(self):
+        sess = Session(user_agent=(
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) '
+            'AppleWebKit/537.36 (KHTML, like Gecko) '
+            'Chrome/70.0.3538.102 Safari/537.36'
+        ))
+        dev = sess.device()
+        assert dev.os.family == 'Mac OS X'
+        assert dev.browser.family == 'Chrome'
+
 
 class ClearsessionsCommandTest(TestCase):
     def test_can_call(self):
@@ -204,4 +214,3 @@ class CachedDBSessionStoreTest(TestCase):
         self.assertIsNone(cache.get(SessionStore.cache_key_prefix + s1.session_key))
         self.assertIsNone(cache.get(SessionStore.cache_key_prefix + s2.session_key))
         self.assertIsNotNone(cache.get(SessionStore.cache_key_prefix + s3.session_key))
-

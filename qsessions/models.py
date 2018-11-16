@@ -64,3 +64,13 @@ class Session(AbstractBaseSession):
 
     def location_info(self):
         return geoip.ip_to_location_info(self.ip)
+
+    def device(self):
+        """
+        Describe the user agent of this session, if any
+        :rtype: user_agents.parsers.UserAgent | None
+        """
+        if self.user_agent:
+            import user_agents  # late import to avoid import cost
+            return user_agents.parse(self.user_agent)
+        return None
