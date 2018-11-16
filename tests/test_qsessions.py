@@ -1,3 +1,5 @@
+# -- encoding: UTF-8 --
+from __future__ import unicode_literals
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib import auth
@@ -163,6 +165,14 @@ class ModelTest(TestCase):
 
         session = Session.objects.get(pk=store.session_key)
         self.assertEqual(session.user_agent, ua[:300])
+
+    def test_location(self):
+        store = SessionStore(user_agent='TestUA/1.1', ip='89.160.20.112')
+        store[auth.SESSION_KEY] = 1
+        store['foo'] = 'bar'
+        store.save()
+        session = Session.objects.get(pk=store.session_key)
+        assert session.location() == 'Linköping, Sweden'
 
 
 class ClearsessionsCommandTest(TestCase):
