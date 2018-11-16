@@ -6,7 +6,7 @@ from django.db import models
 
 from importlib import import_module
 
-from qsessions.utils import ip_to_location
+import qsessions.geoip as geoip
 
 
 class SessionQuerySet(models.QuerySet):
@@ -60,4 +60,7 @@ class Session(AbstractBaseSession):
         return r
 
     def location(self):
-        return ip_to_location(self.ip)
+        return geoip.ip_to_location(self.ip)
+
+    def location_info(self):
+        return geoip.ip_to_location_info(self.ip)

@@ -173,6 +173,10 @@ class ModelTest(TestCase):
         store.save()
         session = Session.objects.get(pk=store.session_key)
         assert session.location() == 'Linköping, Sweden'
+        loc_info = session.location_info()
+        assert loc_info['city'] == 'Linköping'
+        assert loc_info['country_code'] == 'SE'
+        assert loc_info['continent_code'] == 'EU'
 
 
 class ClearsessionsCommandTest(TestCase):
