@@ -1,8 +1,11 @@
+import json
+
 import pytest
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+from qsessions import USER_AGENT_SESSION_KEY
 from qsessions.models import Session
 
 
@@ -14,7 +17,12 @@ def test_unmodified_session(client):
 
 @pytest.mark.django_db
 def test_modify_session(client):
+    client.get('/read_session/', HTTP_USER_AGENT='TestUA/1.1')
     client.get('/modify_session/', HTTP_USER_AGENT='TestUA/1.1')
+    data = json.loads(client.get('/read_session/', HTTP_USER_AGENT='TestUA/1.1').content.decode('UTF-8'))
+    assert data['FOO'] == 'BAR'
+    assert data[USER_AGENT_SESSION_KEY] == 'TestUA/1.1'
+
     assert settings.SESSION_COOKIE_NAME in client.cookies
     session = Session.objects.get(
         pk=client.cookies[settings.SESSION_COOKIE_NAME].value
