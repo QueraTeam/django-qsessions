@@ -16,7 +16,7 @@ setup(
     url='https://github.com/QueraTeam/django-qsessions',
     download_url='https://pypi.python.org/pypi/django-qsessions',
     license='MIT',
-    packages=find_packages(),
+    packages=find_packages('.', include=('qsessions', 'qsessions.*')),
     include_package_data=True,
     install_requires=[
         'Django>=1.10',

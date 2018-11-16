@@ -1,4 +1,6 @@
 *.pyc
 .idea/
-venv/
 .tox/
+build/
+dist/
+venv/
