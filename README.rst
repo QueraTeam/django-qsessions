@@ -179,6 +179,13 @@ We got ideas and some codes
 from django-user-sessions. Many thanks to `Bouke Haarsma`_ for writing
 django-user-sessions.
 
+Development
+===========
+
+* Install development dependencies in your virtualenv with `pip install -e .[dev]`
+* Run tests with coverage using `py.test --cov .`
+
+
 TODO
 ====
 
