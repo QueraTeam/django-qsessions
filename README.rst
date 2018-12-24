@@ -179,8 +179,8 @@ Many thanks to `Bouke Haarsma`_ for writing django-user-sessions.
 Development
 ===========
 
-* Install development dependencies in your virtualenv with `pip install -e '.[dev]'`
-* Run tests with coverage using `py.test --cov .`
+* Install development dependencies in your virtualenv with ``pip install -e '.[dev]'``
+* Run tests with coverage using ``py.test --cov .``
 
 
 TODO
@@ -193,7 +193,7 @@ TODO
 
 - Write more tests
 
-- Performance benchmark (and compare with Django's `cached_db`)
+- Performance benchmark (and compare with Django's ``cached_db``)
 
 Contributions are welcome!
 
