@@ -1,10 +1,10 @@
 from django.conf.urls import url
 from django.contrib import admin
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 
-def empty(request):
-    return HttpResponse('')
+def read_session(request):
+    return JsonResponse(dict(request.session))
 
 
 def modify_session(request):
@@ -13,7 +13,7 @@ def modify_session(request):
 
 
 urlpatterns = [
-    url(r'^$', empty),
+    url(r'^read_session/$', read_session),
     url(r'^modify_session/$', modify_session),
     url(r'^admin/', admin.site.urls),
 ]

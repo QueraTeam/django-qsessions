@@ -10,7 +10,6 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'qsessions',
-    'tests.tests_app'
 ]
 
 MIDDLEWARE = [
@@ -56,3 +55,7 @@ SESSION_ENGINE = 'qsessions.backends.cached_db'
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+
+GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')
+GEOIP_CITY = 'GeoIP2-City-Test.mmdb'
+GEOIP_COUNTRY = 'GeoIP2-Country-Test.mmdb'

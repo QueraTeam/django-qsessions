@@ -16,13 +16,7 @@ class SessionStore(CachedDBStore):
         self.modified = False
         self.user_agent = user_agent[:300] if user_agent else user_agent
         self.ip = ip
-        self.user_id = None
         super(SessionStore, self).__init__(session_key)
-
-    def __setitem__(self, key, value):
-        if key == auth.SESSION_KEY:
-            self.user_id = value
-        super(SessionStore, self).__setitem__(key, value)
 
     @classmethod
     def get_model_class(cls):
@@ -31,7 +25,6 @@ class SessionStore(CachedDBStore):
 
     def load(self):
         data = super(SessionStore, self).load()
-        self.user_id = data.get(auth.SESSION_KEY)
         if data.get(USER_AGENT_SESSION_KEY) != self.user_agent \
                 or data.get(IP_SESSION_KEY) != self.ip:
             # If IP or User Agent has changed, set modified to True in order to save
@@ -53,11 +46,7 @@ class SessionStore(CachedDBStore):
             session_key=self._get_or_create_session_key(),
             session_data=self.encode(data),
             expire_date=self.get_expiry_date(),
-            user_id=self.user_id,
+            user_id=self.get(auth.SESSION_KEY),
             user_agent=self.user_agent,
             ip=self.ip
         )
-
-    def clear(self):
-        super(SessionStore, self).clear()
-        self.user_id = None

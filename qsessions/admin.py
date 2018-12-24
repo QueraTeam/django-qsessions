@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from django.utils.html import format_html
 from django.utils.timezone import now
 from django.contrib import admin
-from user_agents import parse
 from .models import Session
 from pprint import pformat
 
@@ -63,9 +62,6 @@ class SessionAdmin(admin.ModelAdmin):
         User = get_user_model()
         return 'ip', 'user__%s' % getattr(User, 'USERNAME_FIELD', 'username'),\
                'user__%s' % getattr(User, 'USERNAME_EMAIL', 'email')
-
-    def device(self, obj):
-        return str(parse(obj.user_agent)) if obj.user_agent else ''
 
     def is_valid(self, obj):
         return obj.expire_date > now()

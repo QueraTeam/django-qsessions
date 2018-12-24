@@ -6,7 +6,7 @@ from django.db import models
 
 from importlib import import_module
 
-from qsessions.utils import ip_to_location
+import qsessions.geoip as geoip
 
 
 class SessionQuerySet(models.QuerySet):
@@ -42,6 +42,7 @@ class Session(AbstractBaseSession):
         return SessionStore
 
     def save(self, *args, **kwargs):
+        # FIXME: find a better solution for `created_at` field which does not need an extra query.
         # https://code.djangoproject.com/ticket/17654
         try:
             self.created_at = Session.objects.get(pk=self.pk).created_at
@@ -60,4 +61,17 @@ class Session(AbstractBaseSession):
         return r
 
     def location(self):
-        return ip_to_location(self.ip)
+        return geoip.ip_to_location(self.ip)
+
+    def location_info(self):
+        return geoip.ip_to_location_info(self.ip)
+
+    def device(self):
+        """
+        Describe the user agent of this session, if any
+        :rtype: user_agents.parsers.UserAgent | None
+        """
+        if self.user_agent:
+            import user_agents  # late import to avoid import cost
+            return user_agents.parse(self.user_agent)
+        return None
