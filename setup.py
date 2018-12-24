@@ -16,7 +16,7 @@ dev_requirements = [
 
 setup(
     name='django-qsessions',
-    version='0.1.6',
+    version='0.2.0',
     description='Extends Django\'s cached_db session backend',
     long_description=README,
     author='Mohammad Javad Naderi',
@@ -37,6 +37,8 @@ setup(
         'Environment :: Web Environment',
         'Framework :: Django',
         'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.0',
+        'Framework :: Django :: 2.1',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
