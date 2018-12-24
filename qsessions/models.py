@@ -1,22 +1,21 @@
-from django.contrib.sessions.base_session import AbstractBaseSession, BaseSessionManager
-from django.utils.translation import ugettext_lazy as _
-from django.utils import timezone
 from django.conf import settings
+from django.contrib.sessions.base_session import AbstractBaseSession, BaseSessionManager
+from django.core.cache import caches
 from django.db import models
-
-from importlib import import_module
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 import qsessions.geoip as geoip
+from qsessions.backends.cached_db import SessionStore
 
 
 class SessionQuerySet(models.QuerySet):
     def delete(self):
-        SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
-        sessions = [SessionStore(session_key=obj.session_key) for obj in self]
-        r = super(SessionQuerySet, self).delete()
-        for session in sessions:
-            session.delete()
-        return r
+        """
+        Delete sessions from both DB and cache (first cache, then DB)
+        """
+        caches[settings.SESSION_CACHE_ALIAS].delete_many(SessionStore.cache_key_prefix + s.session_key for s in self)
+        return super(SessionQuerySet, self).delete()
 
 
 class SessionManager(BaseSessionManager.from_queryset(SessionQuerySet)):
@@ -38,7 +37,6 @@ class Session(AbstractBaseSession):
 
     @classmethod
     def get_session_store_class(cls):
-        from qsessions.backends.cached_db import SessionStore
         return SessionStore
 
     def save(self, *args, **kwargs):
@@ -52,13 +50,10 @@ class Session(AbstractBaseSession):
 
     def delete(self, *args, **kwargs):
         """
-        Delete session from both DB and cache (first DB, then cache)
+        Delete session from both DB and cache (first cache, then DB)
         """
-        SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
-        session = SessionStore(session_key=self.session_key)
-        r = super(Session, self).delete(*args, **kwargs)
-        session.delete()
-        return r
+        caches[settings.SESSION_CACHE_ALIAS].delete(SessionStore.cache_key_prefix + self.session_key)
+        return super(Session, self).delete(*args, **kwargs)
 
     def location(self):
         return geoip.ip_to_location(self.ip)

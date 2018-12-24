@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 import pytest
 from django.contrib import auth
-from django.core.cache import cache
 
 from qsessions import IP_SESSION_KEY, USER_AGENT_SESSION_KEY
 from qsessions.backends.cached_db import SessionStore
@@ -65,19 +64,34 @@ def test_device():
 
 
 @pytest.mark.django_db
+def test_delete():
+    """
+    Session.delete should delete session from both DB and cache
+    """
+    store = SessionStore(user_agent='TestUA/1.1', ip='127.0.0.1')
+    store.create()
+    session_key = store.session_key
+
+    session = Session.objects.get(pk=session_key)
+    session.delete()
+
+    assert not store.exists(session_key)
+
+
+@pytest.mark.django_db
 def test_bulk_delete_from_both_cache_and_db():
-    s1 = SessionStore(session_key='test1', user_agent='Python/2.7', ip='127.0.0.1')
+    s1 = SessionStore(user_agent='Python/2.7', ip='127.0.0.1')
     s1.create()
-    s2 = SessionStore(session_key='test2', user_agent='Python/2.7', ip='127.0.0.1')
+    s2 = SessionStore(user_agent='Python/2.7', ip='127.0.0.1')
     s2.create()
-    s3 = SessionStore(session_key='test3', user_agent='TestUA/1.1', ip='127.0.0.1')
+    s3 = SessionStore(user_agent='TestUA/1.1', ip='127.0.0.1')
     s3.create()
-    assert cache.get(SessionStore.cache_key_prefix + s1.session_key) is not None
-    assert cache.get(SessionStore.cache_key_prefix + s2.session_key) is not None
-    assert cache.get(SessionStore.cache_key_prefix + s3.session_key) is not None
+    assert s1.exists(s1.session_key)
+    assert s2.exists(s2.session_key)
+    assert s3.exists(s3.session_key)
 
     Session.objects.filter(user_agent='Python/2.7').delete()
 
-    assert cache.get(SessionStore.cache_key_prefix + s1.session_key) is None
-    assert cache.get(SessionStore.cache_key_prefix + s2.session_key) is None
-    assert cache.get(SessionStore.cache_key_prefix + s3.session_key) is not None
+    assert not s1.exists(s1.session_key)
+    assert not s2.exists(s2.session_key)
+    assert s3.exists(s3.session_key)
