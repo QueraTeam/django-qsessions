@@ -42,17 +42,19 @@ Here is a brief comparison between Django's session backends (db, cache, cached_
 Requirements
 ============
 
-+----------------+-----------------+
-| Python version | Django versions |
-+================+=================+
-| 3.6            | 2.0, 1.11, 1.10 |
-+----------------+-----------------+
-| 3.5            | 2.0, 1.11, 1.10 |
-+----------------+-----------------+
-| 3.4            | 2.0, 1.11, 1.10 |
-+----------------+-----------------+
-| 2.7            | 1.11, 1.10      |
-+----------------+-----------------+
++----------------+----------------------+
+| Python version | Django versions      |
++================+======================+
+| 3.7            | 2.0, 2.1             |
++----------------+----------------------+
+| 3.6            | 1.10, 1.11, 2.0, 2.1 |
++----------------+----------------------+
+| 3.5            | 1.10, 1.11, 2.0, 2.1 |
++----------------+----------------------+
+| 3.4            | 1.10, 1.11, 2.0      |
++----------------+----------------------+
+| 2.7            | 1.10, 1.11           |
++----------------+----------------------+
 
 Installation
 ============
@@ -86,7 +88,7 @@ using another session backend, you need to migrate them manually. We have no mig
 
         python manage.py migrate qsessions
 
-For enabling location detection using GeoIP2 (``session.location``):
+For enabling location detection using GeoIP2 (optional):
 
 (5) Install ``geoip2`` package:
 
@@ -126,9 +128,7 @@ Logout a user:
 
 .. code-block:: python
 
-    for session in user.session_set.all():
-        session.delete()
-
+    user.session_set.all().delete()
 
 Session creation time (user login time):
 
@@ -147,12 +147,15 @@ IP and user agent:
     >>> session.user_agent
     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'
 
-And if you have configured GeoIP2, you can call ``.location()``:
+And if you have configured GeoIP2, you can call ``.location()``, ``.location_info()``:
 
 .. code-block:: python
 
     >>> session.location()
     'Tehran, Iran'
+
+    >>> session.location_info()
+    {'city': 'Tehran', 'continent_code': 'AS', 'continent_name': 'Asia', 'country_code': 'IR', 'country_name': 'Iran', 'time_zone': 'Asia/Tehran', ...}
 
 Admin page:
 
@@ -160,11 +163,6 @@ Admin page:
 
 Caveats
 -------
-
-- Please note that bulk deleting sessions (``user.session_set.all().delete()``) does not properly
-  delete sessions. It only deletes them from database, and they will remain in cache. But
-  calling ``delete`` on a single session deletes it from both DB and cache. Contributions on fixing
-  this are welcome.
 
 - ``session.updated_at`` is not the session's last activity. It's updated each time the session
   object in DB is saved. (e.g. when user logs in, or when ip, user agent, or session data changes)
@@ -175,14 +173,13 @@ Why not ``django-user-sessions``?
 `django-user-sessions`_ has the same functionality,
 but it's based on ``db`` backend. Using a cache will improve performance.
 
-We got ideas and some codes
-from django-user-sessions. Many thanks to `Bouke Haarsma`_ for writing
-django-user-sessions.
+We got ideas and some codes from django-user-sessions.
+Many thanks to `Bouke Haarsma`_ for writing django-user-sessions.
 
 Development
 ===========
 
-* Install development dependencies in your virtualenv with `pip install -e .[dev]`
+* Install development dependencies in your virtualenv with `pip install -e '.[dev]'`
 * Run tests with coverage using `py.test --cov .`
 
 
