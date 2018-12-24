@@ -42,6 +42,7 @@ class Session(AbstractBaseSession):
         return SessionStore
 
     def save(self, *args, **kwargs):
+        # FIXME: find a better solution for `created_at` field which does not need an extra query.
         # https://code.djangoproject.com/ticket/17654
         try:
             self.created_at = Session.objects.get(pk=self.pk).created_at

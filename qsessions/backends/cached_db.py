@@ -18,10 +18,6 @@ class SessionStore(CachedDBStore):
         self.ip = ip
         super(SessionStore, self).__init__(session_key)
 
-    @property
-    def user_id(self):
-        return self.get(auth.SESSION_KEY)
-
     @classmethod
     def get_model_class(cls):
         from qsessions.models import Session
@@ -50,7 +46,7 @@ class SessionStore(CachedDBStore):
             session_key=self._get_or_create_session_key(),
             session_data=self.encode(data),
             expire_date=self.get_expiry_date(),
-            user_id=self.user_id,
+            user_id=self.get(auth.SESSION_KEY),
             user_agent=self.user_agent,
             ip=self.ip
         )

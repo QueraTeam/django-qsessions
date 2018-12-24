@@ -29,7 +29,8 @@ class Command(BaseCommand):
             self.extract_tar(db_path, filename)
             os.remove(filename)
 
-    def extract_tar(self, db_path, tar_path):
+    @staticmethod
+    def extract_tar(db_path, tar_path):
         with tarfile.open(tar_path) as tarball:
             for tarinfo in tarball:
                 if tarinfo.name.endswith('.mmdb'):
