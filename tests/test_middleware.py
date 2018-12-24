@@ -45,16 +45,16 @@ def test_modify_session(client, logged_in):
 @pytest.mark.django_db
 def test_login(client):
     admin_login_url = reverse('admin:login')
-    user = User.objects.create_superuser('bouke', '', 'secret')
-    response = client.post(admin_login_url,
+    user = User.objects.create_superuser('user', '', 'secret')
+    response = client.post(
+        admin_login_url,
         data={
-            'username': 'bouke',
+            'username': 'user',
             'password': 'secret',
             'this_is_the_login_form': '1',
             'next': '/admin/'
         },
         HTTP_USER_AGENT='TestUA/1.1',
-
     )
     assert response.url == '/admin/'
     session = Session.objects.get(
@@ -65,4 +65,4 @@ def test_login(client):
 
 @pytest.mark.django_db
 def test_long_ua(client):
-    client.get('/modify_session/', HTTP_USER_AGENT=''.join('a' for _ in range(500)))
+    client.get('/modify_session/', HTTP_USER_AGENT='a' * 500)

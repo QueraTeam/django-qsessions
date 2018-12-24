@@ -12,5 +12,6 @@ def test_can_call():
         expire_date=datetime.now() - timedelta(days=1),
         ip='127.0.0.1',
     )
+    assert Session.objects.count() == 1
     call_command('clearsessions')
     assert Session.objects.count() == 0

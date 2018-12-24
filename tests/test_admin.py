@@ -17,4 +17,3 @@ def test_smoke_admin(admin_client):
         '/admin/qsessions/session/%s/change/' % admin_client.cookies[settings.SESSION_COOKIE_NAME].value
     )
     assert 'FOO' in resp.content.decode('UTF-8')  # Set by modify_session
-
