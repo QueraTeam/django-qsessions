@@ -38,14 +38,6 @@ class OwnerFilter(admin.SimpleListFilter):
             return queryset.filter(user=request.user)
 
 
-def delete_selected(modeladmin, request, queryset):
-    for s in queryset.all():
-        s.delete()
-
-
-delete_selected.short_description = _('Delete selected sessions')
-
-
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
     list_display = ('ip', 'user', 'is_valid', 'created_at', 'expire_date', 'device', 'location')
@@ -56,7 +48,6 @@ class SessionAdmin(admin.ModelAdmin):
     fields = ('user', 'ip', 'location', 'is_valid', 'created_at', 'updated_at', 'expire_date',
               'user_agent', 'device', 'session_key', 'session_data_decoded')
     ordering = ('-expire_date', )
-    actions = [delete_selected]
 
     def get_search_fields(self, request):
         User = get_user_model()
