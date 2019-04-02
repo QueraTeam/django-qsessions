@@ -32,7 +32,9 @@ def test_auth_session_key(store):
 
 
 @pytest.mark.django_db
-def test_save(store):
+def test_save(store, django_user_model):
+    django_user_model.objects.create_user(username='test_user')
+
     store[auth.SESSION_KEY] = 1
     store.save()
 
@@ -44,7 +46,9 @@ def test_save(store):
 
 
 @pytest.mark.django_db
-def test_load_unmodified(store):
+def test_load_unmodified(store, django_user_model):
+    django_user_model.objects.create_user(username='test_user')
+
     store[auth.SESSION_KEY] = 1
     store.save()
     store2 = SessionStore(session_key=store.session_key,
@@ -57,7 +61,9 @@ def test_load_unmodified(store):
 
 
 @pytest.mark.django_db
-def test_load_modified(store):
+def test_load_modified(store, django_user_model):
+    django_user_model.objects.create_user(username='test_user')
+
     store[auth.SESSION_KEY] = 1
     store.save()
     store2 = SessionStore(session_key=store.session_key,
