@@ -15,20 +15,20 @@ def setup_store():
 
 
 def test_untouched_init(store):
-    assert store.modified == False
-    assert store.accessed == False
+    assert store.modified is False
+    assert store.accessed is False
 
 
 def test_auth_session_key(store):
     assert auth.SESSION_KEY not in store
-    assert store.modified == False
-    assert store.accessed == True
+    assert store.modified is False
+    assert store.accessed is True
 
     store.get(auth.SESSION_KEY)
-    assert store.modified == False
+    assert store.modified is False
 
     store[auth.SESSION_KEY] = 1
-    assert store.modified == True
+    assert store.modified is True
 
 
 @pytest.mark.django_db
@@ -57,7 +57,7 @@ def test_load_unmodified(store, django_user_model):
     assert store2.user_agent == 'TestUA/1.1'
     assert store2.ip == '127.0.0.1'
     assert store2.get(auth.SESSION_KEY) == 1
-    assert store2.modified == False
+    assert store2.modified is False
 
 
 @pytest.mark.django_db
@@ -72,7 +72,7 @@ def test_load_modified(store, django_user_model):
     assert store2.user_agent == 'TestUA/1.1'
     assert store2.ip == '8.8.8.8'
     assert store2.get(auth.SESSION_KEY) == 1
-    assert store2.modified == True
+    assert store2.modified is True
 
 
 @pytest.mark.django_db
