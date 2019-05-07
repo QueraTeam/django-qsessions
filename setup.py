@@ -16,7 +16,7 @@ dev_requirements = [
 
 setup(
     name='django-qsessions',
-    version='0.2.0',
+    version='0.2.1',
     description='Extends Django\'s cached_db session backend',
     long_description=README,
     author='Mohammad Javad Naderi',
