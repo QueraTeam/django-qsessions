@@ -11,7 +11,9 @@ from qsessions.models import Session
 
 
 @pytest.mark.django_db
-def test_get_decoded():
+def test_get_decoded(django_user_model):
+    django_user_model.objects.create_user(username='test_user')
+
     store = SessionStore(user_agent='TestUA/1.1', ip='127.0.0.1')
     store[auth.SESSION_KEY] = 1
     store['foo'] = 'bar'
