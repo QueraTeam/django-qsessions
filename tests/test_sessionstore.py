@@ -3,10 +3,16 @@ from datetime import timedelta
 import pytest
 from django.contrib import auth
 from django.contrib.sessions.backends.base import CreateError
+from django.conf import settings
 from django.utils.timezone import now
 
-from qsessions.backends.cached_db import SessionStore
 from qsessions.models import Session
+from qsessions.backends import get_session_store_class
+SessionStore = get_session_store_class()
+from qsessions.backends.cached_db import SessionStore as CachedBackend
+from qsessions.backends.db import SessionStore as DBOnlyBackend
+
+import time
 
 
 @pytest.fixture(name='store')
@@ -114,3 +120,12 @@ def test_clear(store):
 
     session = Session.objects.get(pk=store.session_key)
     assert session.user_id is None
+
+
+def test_import():
+    if settings.SESSION_ENGINE.endswith('.cached_db'):
+        assert issubclass(SessionStore, CachedBackend)
+    elif settings.SESSION_ENGINE.endswith('.db'):
+        assert issubclass(SessionStore, DBOnlyBackend)
+    else:
+        assert False, "Unrecognised Session Engine"

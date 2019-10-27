@@ -6,7 +6,8 @@ import pytest
 from django.contrib import auth
 
 from qsessions import IP_SESSION_KEY, USER_AGENT_SESSION_KEY
-from qsessions.backends.cached_db import SessionStore
+from qsessions.backends import get_session_store_class
+SessionStore = get_session_store_class()
 from qsessions.models import Session
 
 

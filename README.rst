@@ -11,8 +11,7 @@
 
 -------
 
-django-qsessions is a session backend for Django that extends Django's ``cached_db`` session backend
-and ``Session`` model to add following features:
+django-qsessions is a session backend for Django that extends Django's ``Session`` model for along with both the ``cached_db`` and ``db`` backends to add following features:
 
 - Sessions have a foreign key to User
 
@@ -62,9 +61,10 @@ Installation
 Please note that if your system is in production and there are lots of active sessions
 using another session backend, you need to migrate them manually. We have no migration script.
 
-(1) First, make sure you've `configured your cache`_. If you have multiple caches defined in
-    ``CACHES``, Django will use the default cache. To use another cache, set ``SESSION_CACHE_ALIAS``
-    to the name of that cache.
+(1) First, if you're using the cached_db backend, make sure you've
+    `configured your cache`_. If you have multiple caches defined in ``CACHES``, Django
+    will use the default cache. To use another cache, set ``SESSION_CACHE_ALIAS`` to the
+    name of that cache.
 
 (2) Install the latest version from PyPI:
 
@@ -80,7 +80,7 @@ using another session backend, you need to migrate them manually. We have no mig
       ``'django.contrib.sessions.middleware.SessionMiddleware'`` with
       ``'qsessions.middleware.SessionMiddleware'``.
 
-    - Set ``SESSION_ENGINE`` to ``'qsessions.backends.cached_db'``.
+    - Set ``SESSION_ENGINE`` to either ``'qsessions.backends.cached_db'`` or ``'qsessions.backends.db'`` depending on if you want to utilise a cache.
 
 (4) Run migrations to create ``qsessions.models.Session`` model.
 
@@ -98,8 +98,8 @@ For enabling location detection using GeoIP2 (optional):
 
 (6) Set ``GEOIP_PATH`` to a directory for storing GeoIP2 database.
 
-(7) Run the following command to download latest GeoIP2 database. You can add this command to a cron
-    job to update GeoIP2 DB automatically.
+(7) Run the following command to download latest GeoIP2 database. You can add this
+    command to a cron job to update GeoIP2 DB automatically.
 
     .. code-block:: sh
 
@@ -171,7 +171,7 @@ Why not ``django-user-sessions``?
 =================================
 
 `django-user-sessions`_ has the same functionality,
-but it's based on ``db`` backend. Using a cache will improve performance.
+but only implements the ``db`` backend. Using a cache can improve performance.
 
 We got ideas and some codes from django-user-sessions.
 Many thanks to `Bouke Haarsma`_ for writing django-user-sessions.
@@ -181,7 +181,7 @@ Development
 
 * Install development dependencies in your virtualenv with ``pip install -e '.[dev]'``
 * Run tests with coverage using ``py.test --cov .``
-
+* Run tests with the ``db`` backend using ``py.test . --ds tests.db_settings``
 
 TODO
 ====
