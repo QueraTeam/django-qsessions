@@ -3,6 +3,7 @@ from .common import QSessionStoreMixin
 
 KEY_PREFIX = "qsessions.q_cached_db"
 
+
 class SessionStore(QSessionStoreMixin, CachedDBStore):
     """
     Implements cached, database backed sessions, with a foreign key to User.
