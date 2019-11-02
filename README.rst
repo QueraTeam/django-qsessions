@@ -11,32 +11,32 @@
 
 -------
 
-django-qsessions is a session backend for Django that extends Django's ``cached_db`` session backend
-and ``Session`` model to add following features:
+**django-qsessions** offers two extended session backends for Django.
+They extend Django's ``db`` and ``cached_db`` backends (and ``Session`` model)
+with following extra features:
 
 - Sessions have a foreign key to User
-
 - Sessions store IP and User Agent
 
 
 Comparison
 ==========
 
-Here is a brief comparison between Django's session backends (db, cache, cached_db), `django-user-sessions`_, and django-qsessions.
+Here is a brief comparison between Django's session backends (db, cache, cached_db), and django-qsessions.
 
-+-------------------------+----+--------+-----------+----------------------+------------------+
-|                         | db | cache  | cached_db | django-user-sessions | django-qsessions |
-+=========================+====+========+===========+======================+==================+
-| Better Performance      |    | ✔✔     | ✔         |                      | ✔                |
-+-------------------------+----+--------+-----------+----------------------+------------------+
-| Persistent              | ✔  |        | ✔         | ✔                    | ✔                |
-+-------------------------+----+--------+-----------+----------------------+------------------+
-| Foreign Key to User     |    |        |           | ✔                    | ✔                |
-+-------------------------+----+--------+-----------+----------------------+------------------+
-| Store IP and User Agent |    |        |           | ✔                    | ✔                |
-+-------------------------+----+--------+-----------+----------------------+------------------+
-
-
++-------------------------+-------------------------+----------------+
+|                         | django                  | qsessions      |
++                         +-------+-----+-----------+----+-----------+
+|                         | cache | db  | cached_db | db | cached_db |
++=========================+=======+=====+===========+====+===========+
+| Performance             | ✔✔    |     | ✔         |    | ✔         |
++-------------------------+-------+-----+-----------+----+-----------+
+| Persistence             |       | ✔   | ✔         | ✔  | ✔         |
++-------------------------+-------+-----+-----------+----+-----------+
+| Foreign Key to User     |       |     |           | ✔  | ✔         |
++-------------------------+-------+-----+-----------+----+-----------+
+| Store IP and User Agent |       |     |           | ✔  | ✔         |
++-------------------------+-------+-----+-----------+----+-----------+
 
 
 Compatibility
@@ -59,12 +59,13 @@ Compatibility
 Installation
 ============
 
-Please note that if your system is in production and there are lots of active sessions
-using another session backend, you need to migrate them manually. We have no migration script.
+If your system is in production and there are active sessions using another session backend,
+you need to migrate them manually. We have no migration script.
 
-(1) First, make sure you've `configured your cache`_. If you have multiple caches defined in
-    ``CACHES``, Django will use the default cache. To use another cache, set ``SESSION_CACHE_ALIAS``
-    to the name of that cache.
+(1) If you want to use the ``cached_db`` backend, make sure you've
+    `configured your cache`_. If you have multiple caches defined in ``CACHES``, Django
+    will use the default cache. To use another cache, set ``SESSION_CACHE_ALIAS`` to the
+    name of that cache.
 
 (2) Install the latest version from PyPI:
 
@@ -80,7 +81,10 @@ using another session backend, you need to migrate them manually. We have no mig
       ``'django.contrib.sessions.middleware.SessionMiddleware'`` with
       ``'qsessions.middleware.SessionMiddleware'``.
 
-    - Set ``SESSION_ENGINE`` to ``'qsessions.backends.cached_db'``.
+    - Set ``SESSION_ENGINE`` to:
+
+      - ``'qsessions.backends.cached_db'`` if you want to use ``cached_db`` backend.
+      - ``'qsessions.backends.db'`` if you want to use ``db`` backend.
 
 (4) Run migrations to create ``qsessions.models.Session`` model.
 
@@ -88,7 +92,7 @@ using another session backend, you need to migrate them manually. We have no mig
 
         python manage.py migrate qsessions
 
-For enabling location detection using GeoIP2 (optional):
+To enable location detection using GeoIP2 (optional):
 
 (5) Install ``geoip2`` package:
 
@@ -98,8 +102,8 @@ For enabling location detection using GeoIP2 (optional):
 
 (6) Set ``GEOIP_PATH`` to a directory for storing GeoIP2 database.
 
-(7) Run the following command to download latest GeoIP2 database. You can add this command to a cron
-    job to update GeoIP2 DB automatically.
+(7) Run the following command to download latest GeoIP2 database. You can add this
+    command to a cron job to update GeoIP2 DB automatically.
 
     .. code-block:: sh
 
@@ -108,7 +112,7 @@ For enabling location detection using GeoIP2 (optional):
 Usage
 =====
 
-django-qsessions has a custom ``Session`` model with following fields:
+django-qsessions has a custom ``Session`` model with following extra fields:
 ``user``, ``user_agent``, ``created_at``, ``updated_at``, ``ip``.
 
 Getting a user's sessions:
@@ -136,7 +140,6 @@ Session creation time (user login time):
 
     >>> session.created_at
     datetime.datetime(2018, 6, 12, 17, 9, 17, 443909, tzinfo=<UTC>)
-
 
 IP and user agent:
 
@@ -171,7 +174,7 @@ Why not ``django-user-sessions``?
 =================================
 
 `django-user-sessions`_ has the same functionality,
-but it's based on ``db`` backend. Using a cache will improve performance.
+but only extends the ``db`` backend. Using a cache can improve performance.
 
 We got ideas and some codes from django-user-sessions.
 Many thanks to `Bouke Haarsma`_ for writing django-user-sessions.
@@ -179,9 +182,12 @@ Many thanks to `Bouke Haarsma`_ for writing django-user-sessions.
 Development
 ===========
 
-* Install development dependencies in your virtualenv with ``pip install -e '.[dev]'``
-* Run tests with coverage using ``py.test --cov .``
+- Install development dependencies in your virtualenv with ``pip install -e '.[dev]'``
 
+- Run tests with coverage:
+
+  - ``py.test --cov --ds tests.settings_db``
+  - ``py.test --cov --ds tests.settings_cached_db``
 
 TODO
 ====

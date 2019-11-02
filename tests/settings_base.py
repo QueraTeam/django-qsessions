@@ -23,12 +23,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tests.urls'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    }
-}
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -45,7 +39,6 @@ TEMPLATES = [
     },
 ]
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -53,9 +46,6 @@ DATABASES = {
     }
 }
 
-SESSION_ENGINE = 'qsessions.backends.cached_db'
-
-# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
 GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')

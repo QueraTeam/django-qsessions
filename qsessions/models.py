@@ -1,3 +1,5 @@
+from importlib import import_module
+
 from django.conf import settings
 from django.contrib.sessions.base_session import AbstractBaseSession, BaseSessionManager
 from django.core.cache import caches
@@ -6,7 +8,6 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 import qsessions.geoip as geoip
-from qsessions.backends.cached_db import SessionStore
 
 
 class SessionQuerySet(models.QuerySet):
@@ -14,7 +15,10 @@ class SessionQuerySet(models.QuerySet):
         """
         Delete sessions from both DB and cache (first cache, then DB)
         """
-        caches[settings.SESSION_CACHE_ALIAS].delete_many(SessionStore.cache_key_prefix + s.session_key for s in self)
+        SessionStore = Session.get_session_store_class()
+        prefix = getattr(SessionStore, 'cache_key_prefix', None)
+        if prefix is not None:
+            caches[settings.SESSION_CACHE_ALIAS].delete_many(prefix + s.session_key for s in self)
         return super(SessionQuerySet, self).delete()
 
 
@@ -37,7 +41,7 @@ class Session(AbstractBaseSession):
 
     @classmethod
     def get_session_store_class(cls):
-        return SessionStore
+        return import_module(settings.SESSION_ENGINE).SessionStore
 
     def save(self, *args, **kwargs):
         # FIXME: find a better solution for `created_at` field which does not need an extra query.
@@ -52,7 +56,10 @@ class Session(AbstractBaseSession):
         """
         Delete session from both DB and cache (first cache, then DB)
         """
-        caches[settings.SESSION_CACHE_ALIAS].delete(SessionStore.cache_key_prefix + self.session_key)
+        SessionStore = Session.get_session_store_class()
+        prefix = getattr(SessionStore, 'cache_key_prefix', None)
+        if prefix is not None:
+            caches[settings.SESSION_CACHE_ALIAS].delete(prefix + self.session_key)
         return super(Session, self).delete(*args, **kwargs)
 
     def location(self):
