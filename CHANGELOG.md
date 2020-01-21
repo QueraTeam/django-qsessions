@@ -1,3 +1,7 @@
+# 0.4.1
+
+- Update `download_geoip_db` management command to use new Maxmind download URLs, and provide license key.
+
 # 0.4.0
 
 - Added Django 3.0 to support matrix.
