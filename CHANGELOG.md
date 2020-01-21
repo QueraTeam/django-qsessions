@@ -1,3 +1,7 @@
+# 0.4.0
+
+- Added Django 3.0 to support matrix.
+
 # 0.3.0
 
 - Added `qsessions.backends.db` session backend.
