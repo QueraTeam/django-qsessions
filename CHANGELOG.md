@@ -1,7 +1,7 @@
 # 0.4.0
 
 - Added Django 3.0 to support matrix.
-- Remove Python 3.4 from support matrix.
+- Removed Python 3.4 from support matrix.
 
 # 0.3.0
 
