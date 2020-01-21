@@ -104,10 +104,13 @@ To enable location detection using GeoIP2 (optional):
 
 (7) Run the following command to download latest GeoIP2 database. You can add this
     command to a cron job to update GeoIP2 DB automatically.
+    Due to `Maxmind license changes`_ you will need to acquire and use a license key for
+    downloading the databases.  You can pass the key on the command line, or in the ``MAXMIND_LICENSE_KEY``
+    environment variable.
 
     .. code-block:: sh
 
-        python manage.py download_geoip_db
+        python manage.py download_geoip_db -k mykey
 
 Usage
 =====
@@ -211,3 +214,4 @@ MIT
 .. _`configured your cache`: https://docs.djangoproject.com/en/dev/topics/cache/
 .. _`django-user-sessions`: https://github.com/Bouke/django-user-sessions
 .. _`Bouke Haarsma`: https://github.com/Bouke
+.. _`Maxmind license changes`: https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases/
