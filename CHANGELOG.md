@@ -1,6 +1,8 @@
 # 0.4.1
 
-- Update `download_geoip_db` management command to use new Maxmind download URLs, and provide license key.
+- Updated `download_geoip_db` management command to use new Maxmind download URLs, and provide license key.
+
+Thanks @akx
 
 # 0.4.0
 
