@@ -15,8 +15,9 @@ class SessionQuerySet(models.QuerySet):
         """
         Delete sessions from both DB and cache (first cache, then DB)
         """
+        # noinspection PyPep8Naming
         SessionStore = Session.get_session_store_class()
-        prefix = getattr(SessionStore, 'cache_key_prefix', None)
+        prefix = getattr(SessionStore, "cache_key_prefix", None)
         if prefix is not None:
             caches[settings.SESSION_CACHE_ALIAS].delete_many(prefix + s.session_key for s in self)
         return super(SessionQuerySet, self).delete()
@@ -30,12 +31,12 @@ class Session(AbstractBaseSession):
     """
     Session objects containing user session information.
     """
-    user = models.ForeignKey(getattr(settings, 'AUTH_USER_MODEL', 'auth.User'),
-                             null=True, on_delete=models.CASCADE)
+
+    user = models.ForeignKey(getattr(settings, "AUTH_USER_MODEL", "auth.User"), null=True, on_delete=models.CASCADE)
     user_agent = models.CharField(null=True, blank=True, max_length=300)
     created_at = models.DateTimeField(null=True)
     updated_at = models.DateTimeField(auto_now=True)
-    ip = models.GenericIPAddressField(null=True, blank=True, verbose_name=_('IP'))
+    ip = models.GenericIPAddressField(null=True, blank=True, verbose_name=_("IP"))
 
     objects = SessionManager()
 
@@ -56,8 +57,9 @@ class Session(AbstractBaseSession):
         """
         Delete session from both DB and cache (first cache, then DB)
         """
+        # noinspection PyPep8Naming
         SessionStore = Session.get_session_store_class()
-        prefix = getattr(SessionStore, 'cache_key_prefix', None)
+        prefix = getattr(SessionStore, "cache_key_prefix", None)
         if prefix is not None:
             caches[settings.SESSION_CACHE_ALIAS].delete(prefix + self.session_key)
         return super(Session, self).delete(*args, **kwargs)
@@ -75,5 +77,6 @@ class Session(AbstractBaseSession):
         """
         if self.user_agent:
             import user_agents  # late import to avoid import cost
+
             return user_agents.parse(self.user_agent)
         return None

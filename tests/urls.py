@@ -8,12 +8,12 @@ def read_session(request):
 
 
 def modify_session(request):
-    request.session['FOO'] = 'BAR'
-    return HttpResponse('')
+    request.session["FOO"] = "BAR"
+    return HttpResponse("")
 
 
 urlpatterns = [
-    url(r'^read_session/$', read_session),
-    url(r'^modify_session/$', modify_session),
-    url(r'^admin/', admin.site.urls),
+    url(r"^read_session/$", read_session),
+    url(r"^modify_session/$", modify_session),
+    url(r"^admin/", admin.site.urls),
 ]

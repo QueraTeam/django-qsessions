@@ -8,13 +8,9 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('qsessions', '0001_initial'),
+        ("qsessions", "0001_initial"),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='session',
-            name='created_at',
-            field=models.DateTimeField(null=True),
-        ),
+        migrations.AddField(model_name="session", name="created_at", field=models.DateTimeField(null=True),),
     ]

@@ -10,4 +10,5 @@ class SessionStore(QSessionsDBStore, DjangoCachedDBStore):
     Implements cached, database backed sessions, with a foreign key to User.
     It also stores IP and User Agent.
     """
+
     cache_key_prefix = KEY_PREFIX

@@ -16,6 +16,7 @@ def ip_to_location_info(ip):
         return None
 
     from django.contrib.gis.geoip2 import GeoIP2
+
     try:
         g = GeoIP2()
     except Exception as e:
@@ -45,9 +46,9 @@ def ip_to_location(ip):
     if not loc:
         return None
 
-    if loc.get('country_name'):
-        if loc.get('city'):
-            return '{}, {}'.format(loc['city'], loc['country_name'])
-        return loc['country_name']
+    if loc.get("country_name"):
+        if loc.get("city"):
+            return "{}, {}".format(loc["city"], loc["country_name"])
+        return loc["country_name"]
 
     return None

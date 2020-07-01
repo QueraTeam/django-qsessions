@@ -18,12 +18,12 @@ class SessionStore(DjangoDBStore):
     @classmethod
     def get_model_class(cls):
         from qsessions.models import Session
+
         return Session
 
     def load(self):
         data = super().load()
-        if data.get(USER_AGENT_SESSION_KEY) != self.user_agent \
-                or data.get(IP_SESSION_KEY) != self.ip:
+        if data.get(USER_AGENT_SESSION_KEY) != self.user_agent or data.get(IP_SESSION_KEY) != self.ip:
             # If IP or User Agent has changed, set modified to True in order to save
             # the new IP and User Agent
             self.modified = True
@@ -45,5 +45,5 @@ class SessionStore(DjangoDBStore):
             expire_date=self.get_expiry_date(),
             user_id=self.get(auth.SESSION_KEY),
             user_agent=self.user_agent,
-            ip=self.ip
+            ip=self.ip,
         )
