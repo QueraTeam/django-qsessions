@@ -1,6 +1,6 @@
 language: python
 
-matrix:
+jobs:
   include:
     - python: 2.7
       env: DJANGO=1.10
@@ -54,6 +54,11 @@ matrix:
       env: DJANGO=master
     - python: 3.8
       env: DJANGO=master
+
+    - stage: black
+      python: 3.8
+      install: pip install black
+      script: black -l 120 --check qsessions tests
 
   allow_failures:
     - env: DJANGO=master
