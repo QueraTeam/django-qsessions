@@ -2,15 +2,11 @@ language: python
 
 jobs:
   include:
-    - python: 2.7
-      env: DJANGO=1.10
     - python: 3.5
       env: DJANGO=1.10
     - python: 3.6
       env: DJANGO=1.10
 
-    - python: 2.7
-      env: DJANGO=1.11
     - python: 3.5
       env: DJANGO=1.11
     - python: 3.6
@@ -58,7 +54,7 @@ jobs:
     - stage: black
       python: 3.8
       install: pip install black
-      script: black -l 120 --check qsessions tests
+      script: black -l 120 --check qsessions tests setup.py
 
   allow_failures:
     - env: DJANGO=master

@@ -1,8 +1,16 @@
+# 0.5.0
+
+- Drop support for Python 2.
+- Use `ipware.get_client_ip` instead of `ipware.ip.get_real_ip` (which is removed since `django-ipware==3.0.0`)
+- Format source code using [black](https://github.com/psf/black)
+
+Thanks [@sevdog](https://github.com/sevdog)
+
 # 0.4.1
 
 - Updated `download_geoip_db` management command to use new Maxmind download URLs, and provide license key.
 
-Thanks @akx
+Thanks [@akx](https://github.com/akx)
 
 # 0.4.0
 
@@ -13,13 +21,13 @@ Thanks @akx
 
 - Added `qsessions.backends.db` session backend.
 
-Thanks @willstott101
+Thanks [@willstott101](https://github.com/willstott101)
 
 # 0.2.1
 
 - Added support for Django 2.2.
 
-Thanks @akx
+Thanks [@akx](https://github.com/akx)
 
 # 0.2.0
 
@@ -28,7 +36,7 @@ Thanks @akx
 - Improved session delete performance (reduce number of queries)
 - Refactored codes
 
-Thanks @akx, @saeed617
+Thanks [@akx](https://github.com/akx), [@saeed617](https://github.com/saeed617)
 
 # 0.1.6
 
