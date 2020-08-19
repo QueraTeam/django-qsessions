@@ -3,6 +3,7 @@
 I think everything is OK for releasing `1.0.0` since django-qsessions is working fine in production for long time.
 
 - Drop support for Django 1.10.
+- Drop support for Python 3.5, since its end of life is near. Plus, maxminddb doesn't support 3.5 anymore.
 - Add Django 3.1 to support matrix.
 
 # 0.5.0 (Jul 2, 2020)

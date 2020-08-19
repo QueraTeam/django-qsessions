@@ -42,7 +42,7 @@ Here is a brief comparison between Django's session backends (db, cache, cached_
 Compatibility
 =============
 
-- Python: **3.5**, **3.6**, **3.7**, **3.8**
+- Python: **3.6**, **3.7**, **3.8**
 - Django: **1.11**, **2.0**, **2.1**, **2.2**, **3.0**, **3.1**
 
 Installation
