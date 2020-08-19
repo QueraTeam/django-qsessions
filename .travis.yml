@@ -3,11 +3,6 @@ language: python
 jobs:
   include:
     - python: 3.5
-      env: DJANGO=1.10
-    - python: 3.6
-      env: DJANGO=1.10
-
-    - python: 3.5
       env: DJANGO=1.11
     - python: 3.6
       env: DJANGO=1.11
@@ -43,6 +38,13 @@ jobs:
       env: DJANGO=3.0
     - python: 3.8
       env: DJANGO=3.0
+
+    - python: 3.6
+      env: DJANGO=3.1
+    - python: 3.7
+      env: DJANGO=3.1
+    - python: 3.8
+      env: DJANGO=3.1
 
     - python: 3.6
       env: DJANGO=master
