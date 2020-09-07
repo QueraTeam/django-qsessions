@@ -1,2 +1,7 @@
-include README.md
+include README.rst
+include LICENSE.txt
+include CHANGELOG.md
 recursive-include qsessions/locale *
+include tox.ini
+recursive-include tests *.mmdb
+recursive-include tests *.py
