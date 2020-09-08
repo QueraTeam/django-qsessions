@@ -9,6 +9,9 @@
 .. image:: https://img.shields.io/github/license/QueraTeam/django-qsessions.svg
    :target: https://github.com/QueraTeam/django-qsessions/blob/master/LICENSE.txt
 
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+
 -------
 
 **django-qsessions** offers two extended session backends for Django.
@@ -180,6 +183,12 @@ Development
 
   - ``py.test --cov --ds tests.settings_db``
   - ``py.test --cov --ds tests.settings_cached_db``
+
+- Apply **black** code style (using the latest version of black):
+
+.. code-block:: sh
+
+    black -l 120 qsessions tests setup.py
 
 TODO
 ====

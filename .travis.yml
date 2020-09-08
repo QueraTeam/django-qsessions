@@ -48,7 +48,7 @@ jobs:
     - stage: black
       python: 3.8
       install: pip install black
-      script: black -l 120 --check qsessions tests setup.py
+      script: black -l 120 --check --diff --color qsessions tests setup.py
 
   allow_failures:
     - env: DJANGO=master
