@@ -186,9 +186,9 @@ Development
 
 - Apply **black** code style (using the latest version of black):
 
-.. code-block:: sh
+  .. code-block:: sh
 
-    black -l 120 qsessions tests setup.py
+      black -l 120 qsessions tests setup.py
 
 TODO
 ====
