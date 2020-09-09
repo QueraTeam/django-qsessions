@@ -1,4 +1,10 @@
-# 1.0.1 (Sep 8, 2020)
+# 1.1.0 (Sep 9, 2020)
+
+- Link to user in admin page.
+
+Thanks [@YazdanRa](https://github.com/YazdanRa)
+
+# 1.0.1 (Sep 9, 2020)
 
 - Fix N+1 problem in admin page by adding `user` to `select_related`.
 - Update MANIFEST.in

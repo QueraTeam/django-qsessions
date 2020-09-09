@@ -16,7 +16,7 @@ dev_requirements = [
 
 setup(
     name="django-qsessions",
-    version="1.0.1",
+    version="1.1.0",
     description="Extended session backends for Django",
     long_description=README,
     author="Mohammad Javad Naderi",
