@@ -14,7 +14,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         default_license_key = os.environ.get("MAXMIND_LICENSE_KEY")
         parser.add_argument(
-            "-k", "--maxmind-license-key", default=default_license_key, required=(not default_license_key),
+            "-k", "--maxmind-license-key", default=default_license_key, required=(not default_license_key)
         )
 
     def handle(self, maxmind_license_key, verbosity=0, **options):
@@ -28,8 +28,8 @@ class Command(BaseCommand):
             os.makedirs(db_path)
 
         for basename, url in [
-            ("GeoLite2-City.tar.gz", self.get_download_url("GeoLite2-City", maxmind_license_key),),
-            ("GeoLite2-Country.tar.gz", self.get_download_url("GeoLite2-Country", maxmind_license_key),),
+            ("GeoLite2-City.tar.gz", self.get_download_url("GeoLite2-City", maxmind_license_key)),
+            ("GeoLite2-Country.tar.gz", self.get_download_url("GeoLite2-Country", maxmind_license_key)),
         ]:
             filename = os.path.join(db_path, basename)
             if verbosity >= 1:
