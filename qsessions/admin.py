@@ -11,9 +11,6 @@ from pprint import pformat
 def linkify(field_name):
     """
     Converts a foreign key value into clickable links.
-
-    If field_name is 'parent', link text will be str(obj.parent)
-    Link will be admin url for the admin url for obj.parent.id:change
     """
 
     def _linkify(obj):
