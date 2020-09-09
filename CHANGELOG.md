@@ -1,3 +1,10 @@
+# 1.0.1 (Sep 8, 2020)
+
+- Fix N+1 problem in admin page by adding `user` to `select_related`.
+- Update MANIFEST.in
+
+Thanks [@jayvdb](https://github.com/jayvdb)
+
 # 1.0.0 (Aug 19, 2020)
 
 I think everything is OK for releasing `1.0.0` since django-qsessions is working fine in production for long time.

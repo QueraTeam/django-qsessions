@@ -36,6 +36,7 @@ class OwnerFilter(admin.SimpleListFilter):
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
     list_display = ("ip", "user", "is_valid", "created_at", "expire_date", "device", "location")
+    list_select_related = ("user",)
     readonly_fields = (
         "ip",
         "location",
