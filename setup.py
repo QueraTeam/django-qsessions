@@ -16,7 +16,7 @@ dev_requirements = [
 
 setup(
     name="django-qsessions",
-    version="1.1.0",
+    version="1.1.1",
     description="Extended session backends for Django",
     long_description=README,
     author="Mohammad Javad Naderi",
@@ -29,7 +29,7 @@ setup(
     extras_require={"dev": dev_requirements},
     tests_require=dev_requirements,
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Django",
         "Framework :: Django :: 1.11",

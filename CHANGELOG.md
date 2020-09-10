@@ -1,3 +1,7 @@
+# 1.1.1 (Sep 10, 2020)
+
+- Set development status to Production/Stable in setup.py.
+
 # 1.1.0 (Sep 9, 2020)
 
 - Link to user in admin page.
