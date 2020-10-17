@@ -1,3 +1,9 @@
+# 1.1.2 (Oct 17, 2020)
+
+- Use gettext_lazy instead of ugettext_lazy.
+
+Thanks [@akx](https://github.com/akx)
+
 # 1.1.1 (Sep 10, 2020)
 
 - Set development status to Production/Stable in setup.py.
