@@ -5,7 +5,7 @@ from django.contrib.sessions.base_session import AbstractBaseSession, BaseSessio
 from django.core.cache import caches
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 import qsessions.geoip as geoip
 
