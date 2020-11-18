@@ -1,0 +1,62 @@
+name: Tests
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+  workflow_dispatch:
+    inputs: {}
+
+jobs:
+  formatting:
+    name: Check Black Formatting
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install black
+      run: |
+        python -m pip install --upgrade pip
+        pip install black
+    - name: Check code formatting with black
+      run: |
+        black -l 120 --check --diff --color qsessions tests setup.py
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.6", "3.7", "3.8", "3.9"]
+        django-version: ["1.11", "2.0", "2.1", "2.2", "3.0", "3.1"]
+        exclude:
+          - python-version: "3.8"
+            django-version: "1.11"
+          - python-version: "3.9"
+            django-version: "1.11"
+          - python-version: "3.8"
+            django-version: "2.0"
+          - python-version: "3.9"
+            django-version: "2.0"
+          - python-version: "3.8"
+            django-version: "2.1"
+          - python-version: "3.9"
+            django-version: "2.1"
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install django~=${{ matrix.django-version }}
+        pip install -e ".[dev]"
+    - name: Run tests
+      run: |
+        py.test --cov --ds tests.settings_db
+        py.test --cov --ds tests.settings_cached_db

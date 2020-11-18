@@ -3,14 +3,14 @@
 .. image:: https://img.shields.io/pypi/v/django-qsessions.svg
    :target: https://pypi.python.org/pypi/django-qsessions/
 
-.. image:: https://img.shields.io/travis/QueraTeam/django-qsessions.svg
-   :target: https://travis-ci.org/QueraTeam/django-qsessions
+.. image:: https://github.com/QueraTeam/django-qsessions/workflows/Tests/badge.svg
+   :target: https://github.com/QueraTeam/django-qsessions/actions
 
 .. image:: https://img.shields.io/github/license/QueraTeam/django-qsessions.svg
    :target: https://github.com/QueraTeam/django-qsessions/blob/master/LICENSE.txt
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/psf/black
+   :target: https://github.com/psf/black
 
 -------
 
@@ -45,7 +45,7 @@ Here is a brief comparison between Django's session backends (db, cache, cached_
 Compatibility
 =============
 
-- Python: **3.6**, **3.7**, **3.8**
+- Python: **3.6**, **3.7**, **3.8**, **3.9**
 - Django: **1.11**, **2.0**, **2.1**, **2.2**, **3.0**, **3.1**
 
 Installation
