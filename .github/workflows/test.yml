@@ -1,12 +1,6 @@
 name: Tests
 
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
-  workflow_dispatch:
-    inputs: {}
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   formatting:
