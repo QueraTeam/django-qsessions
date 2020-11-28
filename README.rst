@@ -21,6 +21,9 @@ with following extra features:
 - Sessions have a foreign key to User
 - Sessions store IP and User Agent
 
+These features help you implement "Session Management" and show a list of active sessions to the user.
+You can display IP, location and user agent for each session and add an option to revoke sessions.
+
 
 Comparison
 ==========
