@@ -1,4 +1,6 @@
-.. image:: https://user-images.githubusercontent.com/2115303/35397912-f00efbb4-0205-11e8-89b5-3d4f585a4588.png
+================
+Django QSessions
+================
 
 .. image:: https://img.shields.io/pypi/v/django-qsessions.svg
    :target: https://pypi.python.org/pypi/django-qsessions/
@@ -11,8 +13,6 @@
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/psf/black
-
--------
 
 **django-qsessions** offers two extended session backends for Django.
 They extend Django's ``db`` and ``cached_db`` backends (and ``Session`` model)
