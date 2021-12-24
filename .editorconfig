@@ -12,7 +12,7 @@ trim_trailing_whitespace = true
 charset = utf-8
 
 # Do not add "md" here! It breaks Markdown re-formatting in PyCharm.
-[*.{json,yml,yaml,html}]
+[*.{json,yml,yaml,html,md}]
 indent_size = 2
 
 [*.md]

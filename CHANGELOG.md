@@ -1,3 +1,8 @@
+# 1.1.3 (Dec 24, 2021)
+
+- Add django 4.0 support.
+- Remove django 1.11, 2.0, 2.1 support.
+
 # 1.1.2 (Oct 17, 2020)
 
 - Use gettext_lazy instead of ugettext_lazy.
