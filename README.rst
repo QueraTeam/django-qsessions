@@ -48,8 +48,8 @@ Here is a brief comparison between Django's session backends (db, cache, cached_
 Compatibility
 =============
 
-- Python: **3.6**, **3.7**, **3.8**, **3.9**
-- Django: **1.11**, **2.0**, **2.1**, **2.2**, **3.0**, **3.1**, **3.2**
+- Python: **3.6**, **3.7**, **3.8**, **3.9**, **3.10**
+- Django: **2.2**, **3.0**, **3.1**, **3.2**, **4.0**
 
 Installation
 ============
@@ -180,18 +180,16 @@ Many thanks to `Bouke Haarsma`_ for writing django-user-sessions.
 Development
 ===========
 
+- Create and activate a python virtualenv.
+
 - Install development dependencies in your virtualenv with ``pip install -e '.[dev]'``
+
+- Install pre-commit hooks with ``pre-commit install``
 
 - Run tests with coverage:
 
   - ``py.test --cov --ds tests.settings_db``
   - ``py.test --cov --ds tests.settings_cached_db``
-
-- Apply **black** code style (using the latest version of black):
-
-  .. code-block:: sh
-
-      black -l 120 qsessions tests setup.py
 
 TODO
 ====

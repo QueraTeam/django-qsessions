@@ -1,11 +1,13 @@
-from django.utils.translation import gettext_lazy as _
+from pprint import pformat
+
+from django.contrib import admin
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.timezone import now
-from django.contrib import admin
-from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+
 from .models import Session
-from pprint import pformat
 
 
 def linkify(field_name):

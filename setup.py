@@ -1,5 +1,6 @@
 import os
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 with open(os.path.join(os.path.dirname(__file__), "README.rst"), "r", encoding="UTF-8") as readme:
     README = readme.read()
@@ -8,6 +9,7 @@ with open(os.path.join(os.path.dirname(__file__), "README.rst"), "r", encoding="
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 dev_requirements = [
+    "pre-commit",
     "geoip2",  # for testing GeoIP2
     "pytest",
     "pytest-cov",
@@ -16,7 +18,7 @@ dev_requirements = [
 
 setup(
     name="django-qsessions",
-    version="1.1.2",
+    version="1.1.3",
     description="Extended session backends for Django",
     long_description=README,
     author="Mohammad Javad Naderi",
@@ -32,13 +34,11 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Django",
-        "Framework :: Django :: 1.11",
-        "Framework :: Django :: 2.0",
-        "Framework :: Django :: 2.1",
         "Framework :: Django :: 2.2",
         "Framework :: Django :: 3.0",
         "Framework :: Django :: 3.1",
         "Framework :: Django :: 3.2",
+        "Framework :: Django :: 4.0",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
@@ -47,6 +47,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Internet :: WWW/HTTP :: Session",
         "Topic :: Security",
     ],
