@@ -1,5 +1,5 @@
-from django.contrib.sessions.middleware import SessionMiddleware as DjSessionMiddleware
 from django.conf import settings
+from django.contrib.sessions.middleware import SessionMiddleware as DjSessionMiddleware
 from ipware import get_client_ip
 
 
@@ -8,6 +8,6 @@ class SessionMiddleware(DjSessionMiddleware):
         session_key = request.COOKIES.get(settings.SESSION_COOKIE_NAME)
         request.session = self.SessionStore(
             ip=get_client_ip(request)[0],
-            user_agent=request.META.get("HTTP_USER_AGENT", ""),
+            user_agent=request.headers.get("User-Agent", ""),
             session_key=session_key,
         )

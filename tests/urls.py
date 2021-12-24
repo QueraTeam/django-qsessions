@@ -1,10 +1,6 @@
 from django.contrib import admin
 from django.http import HttpResponse, JsonResponse
-
-try:
-    from django.urls import re_path as url
-except ImportError:
-    from django.conf.urls import url
+from django.urls import path
 
 
 def read_session(request):
@@ -17,7 +13,7 @@ def modify_session(request):
 
 
 urlpatterns = [
-    url(r"^read_session/$", read_session),
-    url(r"^modify_session/$", modify_session),
-    url(r"^admin/", admin.site.urls),
+    path("read_session/", read_session),
+    path("modify_session/", modify_session),
+    path("admin/", admin.site.urls),
 ]
