@@ -1,5 +1,6 @@
 import os
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 with open(os.path.join(os.path.dirname(__file__), "README.rst"), "r", encoding="UTF-8") as readme:
     README = readme.read()
@@ -8,6 +9,7 @@ with open(os.path.join(os.path.dirname(__file__), "README.rst"), "r", encoding="
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 dev_requirements = [
+    "pre-commit",
     "geoip2",  # for testing GeoIP2
     "pytest",
     "pytest-cov",

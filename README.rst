@@ -180,18 +180,16 @@ Many thanks to `Bouke Haarsma`_ for writing django-user-sessions.
 Development
 ===========
 
+- Create and activate a python virtualenv.
+
 - Install development dependencies in your virtualenv with ``pip install -e '.[dev]'``
+
+- Install pre-commit hooks with ``pre-commit install``
 
 - Run tests with coverage:
 
   - ``py.test --cov --ds tests.settings_db``
   - ``py.test --cov --ds tests.settings_cached_db``
-
-- Apply **black** code style (using the latest version of black):
-
-  .. code-block:: sh
-
-      black -l 120 qsessions tests setup.py
 
 TODO
 ====
