@@ -20,7 +20,7 @@ class SessionQuerySet(models.QuerySet):
         prefix = getattr(SessionStore, "cache_key_prefix", None)
         if prefix is not None:
             caches[settings.SESSION_CACHE_ALIAS].delete_many(prefix + s.session_key for s in self)
-        return super(SessionQuerySet, self).delete()
+        return super().delete()
 
 
 class SessionManager(BaseSessionManager.from_queryset(SessionQuerySet)):
@@ -51,7 +51,7 @@ class Session(AbstractBaseSession):
             self.created_at = Session.objects.get(pk=self.pk).created_at
         except Session.DoesNotExist:
             self.created_at = timezone.now()
-        super(Session, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         """
@@ -62,7 +62,7 @@ class Session(AbstractBaseSession):
         prefix = getattr(SessionStore, "cache_key_prefix", None)
         if prefix is not None:
             caches[settings.SESSION_CACHE_ALIAS].delete(prefix + self.session_key)
-        return super(Session, self).delete(*args, **kwargs)
+        return super().delete(*args, **kwargs)
 
     def location(self):
         return geoip.ip_to_location(self.ip)

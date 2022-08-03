@@ -34,7 +34,7 @@ class Command(BaseCommand):
             filename = os.path.join(db_path, basename)
             if verbosity >= 1:
                 redacted_url = re.sub("license_key=([^&]+)", "license_key=...", url)
-                self.stdout.write("Downloading and extracting {url}...".format(url=redacted_url))
+                self.stdout.write(f"Downloading and extracting {redacted_url}...")
             urllib.request.urlretrieve(url, filename)
             self.extract_tar(db_path, filename, verbosity)
             os.remove(filename)
