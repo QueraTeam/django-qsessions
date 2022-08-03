@@ -53,4 +53,4 @@ class Command(BaseCommand):
                     tarball.extract(tarinfo, path=db_path)
                     if verbosity >= 2:
                         dest_path = os.path.join(db_path, tarinfo.name)
-                        self.stdout.write("  => %s" % dest_path)
+                        self.stdout.write(f"  => {dest_path}")

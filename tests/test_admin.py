@@ -12,6 +12,6 @@ def test_smoke_admin(admin_client):
     assert "Linköping, Sweden" in content  # From REMOTE_ADDR
     assert "Chrome 70.0.3538" in content  # From HTTP_USER_AGENT
     resp = admin_client.get(
-        "/admin/qsessions/session/%s/change/" % admin_client.cookies[settings.SESSION_COOKIE_NAME].value
+        f"/admin/qsessions/session/{admin_client.cookies[settings.SESSION_COOKIE_NAME].value}/change/"
     )
     assert "FOO" in resp.content.decode("UTF-8")  # Set by modify_session

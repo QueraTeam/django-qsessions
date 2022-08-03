@@ -94,8 +94,8 @@ class SessionAdmin(admin.ModelAdmin):
         User = get_user_model()
         return (
             "ip",
-            "user__%s" % getattr(User, "USERNAME_FIELD", "username"),
-            "user__%s" % getattr(User, "USERNAME_EMAIL", "email"),
+            f"user__{getattr(User, 'USERNAME_FIELD', 'username')}",
+            f"user__{getattr(User, 'USERNAME_EMAIL', 'email')}",
         )
 
     def is_valid(self, obj):
