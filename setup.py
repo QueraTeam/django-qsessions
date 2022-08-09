@@ -2,7 +2,7 @@ import os
 
 from setuptools import find_packages, setup
 
-with open(os.path.join(os.path.dirname(__file__), "README.rst"), "r", encoding="UTF-8") as readme:
+with open(os.path.join(os.path.dirname(__file__), "README.rst"), encoding="UTF-8") as readme:
     README = readme.read()
 
 # allow setup.py to be run from any path
@@ -27,23 +27,19 @@ setup(
     license="MIT",
     packages=find_packages(".", include=("qsessions", "qsessions.*")),
     include_package_data=True,
-    install_requires=["Django>=1.11", "user-agents>=1.1.0", "django-ipware>=2.0.0"],
+    install_requires=["Django>=3.2", "user-agents>=1.1.0", "django-ipware>=2.0.0"],
     extras_require={"dev": dev_requirements},
     tests_require=dev_requirements,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Django",
-        "Framework :: Django :: 2.2",
-        "Framework :: Django :: 3.0",
-        "Framework :: Django :: 3.1",
         "Framework :: Django :: 3.2",
         "Framework :: Django :: 4.0",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",

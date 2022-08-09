@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import warnings
 
 from django.contrib.gis.geoip2 import HAS_GEOIP2
@@ -49,7 +47,7 @@ def ip_to_location(ip):
 
     if loc.get("country_name"):
         if loc.get("city"):
-            return "{}, {}".format(loc["city"], loc["country_name"])
+            return f"{loc['city']}, {loc['country_name']}"
         return loc["country_name"]
 
     return None
