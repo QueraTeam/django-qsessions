@@ -11,7 +11,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 dev_requirements = [
     "pre-commit",
     "geoip2",  # for testing GeoIP2
-    "pytest",
+    "pytest>=7",
     "pytest-cov",
     "pytest-django",
 ]
@@ -27,7 +27,7 @@ setup(
     license="MIT",
     packages=find_packages(".", include=("qsessions", "qsessions.*")),
     include_package_data=True,
-    install_requires=["Django>=3.2", "user-agents>=1.1.0", "django-ipware>=2.0.0"],
+    install_requires=["Django >= 3.2, != 4.1.0", "user-agents>=1.1.0", "django-ipware>=2.0.0"],
     extras_require={"dev": dev_requirements},
     tests_require=dev_requirements,
     classifiers=[
