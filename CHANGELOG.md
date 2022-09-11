@@ -1,7 +1,15 @@
+# 1.1.4 (Sep 11, 2022)
+
+- Add Django 4.1 support.
+- Drop support for Python 3.6.
+- Drop support for Django 2.2, 3.0, 3.1.
+
+Thanks [@akx](https://github.com/akx)
+
 # 1.1.3 (Dec 24, 2021)
 
-- Add django 4.0 support.
-- Remove django 1.11, 2.0, 2.1 support.
+- Add Django 4.0 support.
+- Drop support for Django 1.11, 2.0, 2.1.
 
 # 1.1.2 (Oct 17, 2020)
 
