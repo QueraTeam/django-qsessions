@@ -10,6 +10,6 @@ SESSION_ENGINES = [
 
 
 @pytest.fixture(autouse=True, name="SessionStore", params=SESSION_ENGINES)
-def get_store(request):
+def session_store(request):
     settings.SESSION_ENGINE = request.param
     return Session.get_session_store_class()
