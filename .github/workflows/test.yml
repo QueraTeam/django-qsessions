@@ -44,8 +44,7 @@ jobs:
           pip install -e ".[dev]"
       - name: Run tests
         run: |
-          py.test --cov --cov-report=xml --ds tests.settings_db
-          py.test --cov --ds tests.settings_cached_db
+          py.test --cov --cov-report=xml --ds tests.settings
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:

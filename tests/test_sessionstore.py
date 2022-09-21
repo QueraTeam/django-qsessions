@@ -9,11 +9,9 @@ from django.utils.timezone import now
 from qsessions import IP_SESSION_KEY, USER_AGENT_SESSION_KEY
 from qsessions.models import Session
 
-SessionStore = Session.get_session_store_class()
-
 
 @pytest.fixture(name="store")
-def setup_store():
+def setup_store(SessionStore):
     return SessionStore(user_agent="TestUA/1.1", ip="127.0.0.1")
 
 
@@ -60,7 +58,7 @@ def test_save(store, django_user_model):
 
 
 @pytest.mark.django_db
-def test_load_unmodified(store, django_user_model):
+def test_load_unmodified(SessionStore, store, django_user_model):
     django_user_model.objects.create_user(username="test_user")
 
     store[auth.SESSION_KEY] = 1
@@ -74,7 +72,7 @@ def test_load_unmodified(store, django_user_model):
 
 
 @pytest.mark.django_db
-def test_load_modified(store, django_user_model):
+def test_load_modified(SessionStore, store, django_user_model):
     django_user_model.objects.create_user(username="test_user")
 
     store[auth.SESSION_KEY] = 1
@@ -93,7 +91,7 @@ def test_load_modified(store, django_user_model):
 
 
 @pytest.mark.django_db
-def test_duplicate_create():
+def test_duplicate_create(SessionStore):
     s1 = SessionStore(session_key="DUPLICATE", user_agent="TestUA/1.1", ip="127.0.0.1")
     s1.create()
     s2 = SessionStore(session_key="DUPLICATE", user_agent="TestUA/1.1", ip="127.0.0.1")
@@ -133,7 +131,7 @@ def test_clear(store):
     assert session.user_id is None
 
 
-def test_import():
+def test_import(SessionStore):
     if settings.SESSION_ENGINE.endswith(".cached_db"):
         from qsessions.backends.cached_db import SessionStore as CachedDBBackend
 

@@ -52,3 +52,5 @@ STATIC_URL = "/static/"
 GEOIP_PATH = os.path.join(BASE_DIR, "geoip")
 GEOIP_CITY = "GeoIP2-City-Test.mmdb"
 GEOIP_COUNTRY = "GeoIP2-Country-Test.mmdb"
+
+CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
