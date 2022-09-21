@@ -4,11 +4,9 @@ from django.contrib import auth
 from qsessions import IP_SESSION_KEY, USER_AGENT_SESSION_KEY
 from qsessions.models import Session
 
-SessionStore = Session.get_session_store_class()
-
 
 @pytest.mark.django_db
-def test_get_decoded(django_user_model):
+def test_get_decoded(SessionStore, django_user_model):
     django_user_model.objects.create_user(username="test_user")
 
     store = SessionStore(user_agent="TestUA/1.1", ip="127.0.0.1")
@@ -26,7 +24,7 @@ def test_get_decoded(django_user_model):
 
 
 @pytest.mark.django_db
-def test_very_long_ua():
+def test_very_long_ua(SessionStore):
     ua = (
         "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; ELT; "
         "BTRS29395; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ;  "
@@ -67,7 +65,7 @@ def test_device():
 
 
 @pytest.mark.django_db
-def test_delete():
+def test_delete(SessionStore):
     """
     Session.delete should delete session from both DB and cache
     """
@@ -82,7 +80,7 @@ def test_delete():
 
 
 @pytest.mark.django_db
-def test_bulk_delete_from_both_cache_and_db():
+def test_bulk_delete_from_both_cache_and_db(SessionStore):
     s1 = SessionStore(user_agent="Python/2.7", ip="127.0.0.1")
     s1.create()
     s2 = SessionStore(user_agent="Python/2.7", ip="127.0.0.1")

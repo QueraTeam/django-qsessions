@@ -2,7 +2,7 @@ import os
 
 from setuptools import find_packages, setup
 
-with open(os.path.join(os.path.dirname(__file__), "README.rst"), encoding="UTF-8") as readme:
+with open(os.path.join(os.path.dirname(__file__), "README.md"), encoding="UTF-8") as readme:
     README = readme.read()
 
 # allow setup.py to be run from any path
@@ -21,6 +21,7 @@ setup(
     version="1.1.4",
     description="Extended session backends for Django",
     long_description=README,
+    long_description_content_type="text/markdown",
     author="Mohammad Javad Naderi",
     url="https://github.com/QueraTeam/django-qsessions",
     download_url="https://pypi.python.org/pypi/django-qsessions",
