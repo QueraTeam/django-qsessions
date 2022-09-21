@@ -1,9 +1,10 @@
 # Django QSessions
 
-[![image](https://img.shields.io/pypi/v/django-qsessions.svg)](https://pypi.python.org/pypi/django-qsessions/)
-[![image](https://github.com/QueraTeam/django-qsessions/workflows/Tests/badge.svg)](https://github.com/QueraTeam/django-qsessions/actions)
-[![image](https://img.shields.io/github/license/QueraTeam/django-qsessions.svg)](https://github.com/QueraTeam/django-qsessions/blob/master/LICENSE.txt)
-[![image](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![pypi](https://img.shields.io/pypi/v/django-qsessions.svg)](https://pypi.python.org/pypi/django-qsessions/)
+[![tests ci](https://github.com/QueraTeam/django-qsessions/workflows/Tests/badge.svg)](https://github.com/QueraTeam/django-qsessions/actions)
+[![code coverage](https://codecov.io/github/QueraTeam/django-qsessions/branch/master/graph/badge.svg?token=BBjmqpcaZO)](https://codecov.io/github/QueraTeam/django-qsessions)
+[![MIT](https://img.shields.io/github/license/QueraTeam/django-qsessions.svg)](https://github.com/QueraTeam/django-qsessions/blob/master/LICENSE.txt)
+[![black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 **django-qsessions** offers two extended session backends for Django.
 They extend Django's `db` and `cached_db` backends (and `Session` model)
