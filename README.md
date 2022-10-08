@@ -2,7 +2,7 @@
 
 [![pypi](https://img.shields.io/pypi/v/django-qsessions.svg)](https://pypi.python.org/pypi/django-qsessions/)
 [![tests ci](https://github.com/QueraTeam/django-qsessions/workflows/Tests/badge.svg)](https://github.com/QueraTeam/django-qsessions/actions)
-[![code coverage](https://codecov.io/github/QueraTeam/django-qsessions/branch/master/graph/badge.svg?token=BBjmqpcaZO)](https://codecov.io/github/QueraTeam/django-qsessions)
+[![coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/quera-team/21974aee9ff21ae779be1549795b4e09/raw/pytest-coverage__main.json)](https://github.com/QueraTeam/django-qsessions/actions)
 [![MIT](https://img.shields.io/github/license/QueraTeam/django-qsessions.svg)](https://github.com/QueraTeam/django-qsessions/blob/master/LICENSE.txt)
 [![black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
@@ -214,7 +214,7 @@ django-user-sessions.
 - Install development dependencies in your virtualenv with `pip install -e '.[dev]'`
 - Install pre-commit hooks with `pre-commit install`
 - Run tests with coverage:
-  - `py.test --cov --ds tests.settings`
+  - `py.test --cov`
 
 ## TODO
 
