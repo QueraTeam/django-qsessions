@@ -1,10 +1,10 @@
-name: Tests
+name: tests
 
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
   formatting:
-    name: Check Black Formatting
+    name: Check black formatting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

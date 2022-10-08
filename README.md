@@ -1,7 +1,7 @@
 # Django QSessions
 
 [![pypi](https://img.shields.io/pypi/v/django-qsessions.svg)](https://pypi.python.org/pypi/django-qsessions/)
-[![tests ci](https://github.com/QueraTeam/django-qsessions/workflows/Tests/badge.svg)](https://github.com/QueraTeam/django-qsessions/actions)
+[![tests ci](https://github.com/QueraTeam/django-qsessions/workflows/tests/badge.svg)](https://github.com/QueraTeam/django-qsessions/actions)
 [![coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/quera-team/21974aee9ff21ae779be1549795b4e09/raw/pytest-coverage__main.json)](https://github.com/QueraTeam/django-qsessions/actions)
 [![MIT](https://img.shields.io/github/license/QueraTeam/django-qsessions.svg)](https://github.com/QueraTeam/django-qsessions/blob/master/LICENSE.txt)
 [![black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
