@@ -52,7 +52,7 @@ jobs:
         with:
           pytest-coverage-path: ./pytest-coverage.txt
           junitxml-path: ./pytest.xml
-      - if: ${{ strategy.job-index == 0 }}
+      - if: ${{ strategy.job-index == 0 && github.ref == 'refs/heads/main' }}
         name: Create the coverage badge
         uses: schneegans/dynamic-badges-action@v1.4.0
         with:
