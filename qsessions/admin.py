@@ -98,16 +98,13 @@ class SessionAdmin(admin.ModelAdmin):
             f"user__{getattr(User, 'USERNAME_EMAIL', 'email')}",
         )
 
+    @admin.display(description=_("Is valid"), boolean=True)
     def is_valid(self, obj):
         return obj.expire_date > now()
 
-    is_valid.boolean = True
-    is_valid.short_description = _("Is valid")
-
+    @admin.display(description=_("Session data"))
     def session_data_decoded(self, obj):
         return format_html(
             '<pre style="white-space: pre-wrap; max-width: 800px; display: inline-block; direction: ltr;">{}</pre>',
             pformat(obj.get_decoded()),
         )
-
-    session_data_decoded.short_description = _("Session data")
