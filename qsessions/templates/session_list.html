@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 i18n user_agent %}
+
+{% block content %}
+<div class="container">
+  <div class="row align-items-start">
+    <div class="col-12 offset-xl-1 col-xl-10">
+      {% translate "Unknown" as unknown %}
+
+      <h1>{% translate "Active Sessions" %}</h1>
+
+      <table class="table table-bordered table-hover table-striped">
+        <thead>
+          <tr>
+            <th scope="col">{% translate "Location" %}</th>
+            <th scope="col">{% translate "Device" %}</th>
+            <th scope="col">{% translate "Last Activity" %}</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        {% for session in sessions %}
+          {% with ua=session.device %}
+          <tr  {% if session.session_key == session_key %}class="active"{% endif %}>
+            <td>{{ session.location|default_if_none:unknown }} <small>({{ session.ip }})</small></td>
+            <td>{% ua_str ua %}</td>
+            <td>
+              {% if session.session_key == session_key %}
+                {% blocktranslate with time=session.updated_at|timesince %}{{ time }} ago (this session){% endblocktranslate %}
+              {% else %}
+                {% blocktranslate with time=session.updated_at|timesince %}{{ time }} ago{% endblocktranslate %}
+              {% endif %}
+            </td>
+          </tr>
+          {% endwith %}
+        {% endfor %}
+        </tbody>
+      </table>
+
+      {% if sessions.count > 1 %}
+        <fieldset>
+          <form method="post" action="{% url 'user_sessions:session_delete_other' %}">
+            {% csrf_token %}
+            <p>{% blocktranslate %}You can also end all other sessions but the current.
+              This will log you out on all other devices.{% endblocktranslate %}</p>
+            {% translate "End All Other Sessions" as end_all %}{% bootstrap_button end_all button_type="submit" button_class="btn-danger float-end" %}
+          </form>
+        </fieldset>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
