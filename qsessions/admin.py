@@ -63,7 +63,6 @@ class SessionAdmin(admin.ModelAdmin):
         "ip",
         "location",
         "user",
-        "user_agent",
         "is_valid",
         "expire_date",
         "created_at",
