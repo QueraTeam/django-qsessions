@@ -142,16 +142,16 @@ To enable location detection using GeoIP2 (optional):
 django-qsessions has a custom `Session` model with following extra
 fields: `user`, `user_agent`, `created_at`, `updated_at`, `ip`.
 
-Getting a user's sessions:
+Get a user's sessions:
 
 ```python
 user.session_set.filter(expire_date__gt=timezone.now())
 ```
 
-Deleting a session:
+Delete a session:
 
 ```python
-# Deletes session from both DB and cache
+# Deletes the session from both the database and the cache.
 session.delete()
 ```
 
@@ -161,24 +161,38 @@ Logout a user:
 user.session_set.all().delete()
 ```
 
-Session creation time (user login time):
+Get session creation time (user login time):
 
 ```python
 >>> session.created_at
 datetime.datetime(2018, 6, 12, 17, 9, 17, 443909, tzinfo=<UTC>)
 ```
 
-IP and user agent:
+Get IP and user agent:
 
 ```python
 >>> session.ip
 '127.0.0.1'
 >>> session.user_agent
-'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'
+'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36'
 ```
 
-And if you have configured GeoIP2, you can call `.location()`,
-`.location_info()`:
+Get user device (parsed user-agent string):
+
+```python
+>>> str(session.device())
+'K / Android 10 / Chrome Mobile 118.0.0'
+>>> session.device().device
+Device(family='K', brand='Generic_Android', model='K')
+>>> session.device().os
+OperatingSystem(family='Android', version=(10,), version_string='10')
+>>> session.device().browser
+Browser(family='Chrome Mobile', version=(118, 0, 0), version_string='118.0.0')
+```
+
+
+And if you have configured GeoIP2, you can get location info using `.location()`
+and `.location_info()`:
 
 ```python
 >>> session.location()
@@ -194,7 +208,7 @@ Admin page:
 
 ### Caveats
 
-- `session.updated_at` is not the session's last activity. It's
+- `session.updated_at` is not the session's exact last activity. It's
   updated each time the session object in DB is saved. (e.g. when user
   logs in, or when ip, user agent, or session data changes)
 
