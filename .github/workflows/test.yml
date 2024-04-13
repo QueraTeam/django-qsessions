@@ -45,7 +45,7 @@ jobs:
         uses: schneegans/dynamic-badges-action@v1.4.0
         with:
           auth: ${{ secrets.CODECOVERAGE_GIST }}
-          gistID: 21974aee9ff21ae779be1549795b4e09
+          gistID: 24a6d63ff9d29d9be5399169f8199ca0
           filename: pytest-coverage__${{ github.ref_name }}.json
           label: coverage
           message: ${{ steps.coverageComment.outputs.coverage }}
