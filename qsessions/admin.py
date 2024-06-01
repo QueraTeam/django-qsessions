@@ -59,19 +59,6 @@ class OwnerFilter(admin.SimpleListFilter):
 class SessionAdmin(admin.ModelAdmin):
     list_display = ("ip", linkify("user"), "is_valid", "created_at", "expire_date", "device", "location")
     list_select_related = ("user",)
-    readonly_fields = (
-        "ip",
-        "location",
-        "user",
-        "is_valid",
-        "expire_date",
-        "created_at",
-        "updated_at",
-        "user_agent",
-        "device",
-        "session_key",
-        "session_data_decoded",
-    )
     list_filter = ExpiredFilter, OwnerFilter
     fields = (
         "user",
@@ -107,3 +94,9 @@ class SessionAdmin(admin.ModelAdmin):
             '<pre style="white-space: pre-wrap; max-width: 800px; display: inline-block; direction: ltr;">{}</pre>',
             pformat(obj.get_decoded()),
         )
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
