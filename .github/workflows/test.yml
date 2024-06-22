@@ -8,21 +8,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
-      - uses: pre-commit/action@v3.0.0
+      - uses: actions/setup-python@v5
+      - uses: pre-commit/action@v3.0.1
 
   test:
     name: Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11", "3.10", "3.9", "3.8"]
-        django-version: ["4.2", "4.1", "3.2"]
-
+        python-version: ["3.12", "3.11", "3.10"]
+        django-version: ["5.0", "4.2"]
+        include:
+          - python-version: "3.9"
+            django-version: "4.2"
+          - python-version: "3.8"
+            django-version: "4.2"
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
@@ -42,7 +46,7 @@ jobs:
           junitxml-path: ./pytest.xml
       - if: ${{ strategy.job-index == 0 && github.ref == 'refs/heads/main' }}
         name: Create the coverage badge
-        uses: schneegans/dynamic-badges-action@v1.4.0
+        uses: schneegans/dynamic-badges-action@v1.7.0
         with:
           auth: ${{ secrets.CODECOVERAGE_GIST }}
           gistID: 24a6d63ff9d29d9be5399169f8199ca0
