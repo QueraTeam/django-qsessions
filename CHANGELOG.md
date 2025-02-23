@@ -1,4 +1,4 @@
-# Unreleased
+# 2.0.0 (Feb 23, 2025)
 
 - Add support for Python 3.13 and drop support for Python 3.8.
 
