@@ -1,6 +1,15 @@
 # Unreleased
 
-- Add support for Python 3.13.  
+- Add support for Python 3.13.
+- Remove **django-ipware** dependency to reduce the risk of IP spoofing.
+  (for the same reason Django
+  [removed](https://docs.djangoproject.com/en/5.2/releases/1.1/#removed-setremoteaddrfromforwardedfor-middleware)
+  `SetRemoteAddrFromForwardedFor` in 1.1).
+  The IP is now extracted directly from the `REMOTE_ADDR` header.
+  Instead of relying on **django-ipware**
+  to extract the IP address from the request,
+  you should configure your web server
+  to pass the real IP address in the `REMOTE_ADDR` header.
 
 # 1.1.5 (Jun 22, 2024)
 

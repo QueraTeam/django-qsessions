@@ -209,18 +209,11 @@ Admin page:
 ### Caveats
 
 - `session.updated_at` is not the session's exact last activity. It's
-  updated each time the session object in DB is saved. (e.g. when user
+  updated each time the session object is saved in DB. (e.g. when user
   logs in, or when ip, user agent, or session data changes)
-
-## Why not `django-user-sessions`?
-
-[django-user-sessions](https://github.com/Bouke/django-user-sessions)
-has the same functionality, but only extends the `db` backend. Using a
-cache can improve performance.
-
-We got ideas and some codes from django-user-sessions. Many thanks to
-[Bouke Haarsma](https://github.com/Bouke) for writing
-django-user-sessions.
+- **django-qsessions** extracts IP directly from the `REMOTE_ADDR` header.
+  If you are using a reverse proxy, you need to configure it to pass the
+  real IP address in the `REMOTE_ADDR` header.
 
 ## Development
 
