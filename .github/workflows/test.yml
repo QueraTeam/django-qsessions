@@ -44,6 +44,7 @@ jobs:
           pip install -e ".[dev]"
       - name: Run tests
         run: |
+          set -o pipefail
           py.test --cov --junitxml=pytest.xml --cov-report=term-missing:skip-covered | tee pytest-coverage.txt
       - if: ${{ strategy.job-index == 0 }}
         name: Pytest coverage comment
