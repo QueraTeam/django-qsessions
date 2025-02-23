@@ -65,11 +65,13 @@ class Session(AbstractBaseSession):
             caches[settings.SESSION_CACHE_ALIAS].delete(prefix + self.session_key)
         return super().delete(*args, **kwargs)
 
-    def location(self):
-        return geoip.ip_to_location(self.ip)
-
-    def location_info(self):
+    @cached_property
+    def location_info(self) -> dict:
         return geoip.ip_to_location_info(self.ip)
+
+    @cached_property
+    def location(self) -> str:
+        return geoip.ip_to_location(self.ip)
 
     @cached_property
     def device_info(self):

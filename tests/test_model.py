@@ -42,8 +42,8 @@ def test_very_long_ua(SessionStore):
 
 def test_location():
     session = Session(ip="89.160.20.112")
-    assert session.location() == "Linköping, Sweden"
-    loc_info = session.location_info()
+    assert session.location == "Linköping, Sweden"
+    loc_info = session.location_info
     assert loc_info["city"] == "Linköping"
     assert loc_info["country_code"] == "SE"
 

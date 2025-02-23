@@ -15,6 +15,8 @@ Backward-incompatible changes:
   or you can write a custom version of
   [`SetRemoteAddrFromForwardedFor` middleware](https://github.com/django/django/blob/91f18400cc0fb37659e2dbaab5484ff2081f1f30/django/middleware/http.py#L33)
   which suits your environment.
+- `session.location` and `session.location_info` are now properties
+  instead of methods.
 - `session.device` is now a property instead of a method and returns string.
 - The device object can be accessed using the new property `session.device_info`.
 - User agent parsing is now done using `ua-parser` instead of `user-agents`.

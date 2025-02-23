@@ -191,14 +191,14 @@ UserAgent(family='Chrome Mobile', major='118', minor='0', patch='0', patch_minor
 ```
 
 
-And if you have configured GeoIP2, you can get location info using `.location()`
-and `.location_info()`:
+And if you have configured GeoIP2,
+you can get location info using `.location` and `.location_info`:
 
 ```python
->>> session.location()
+>>> session.location
 'Tehran, Iran'
 
->>> session.location_info()
+>>> session.location_info
 {'city': 'Tehran', 'continent_code': 'AS', 'continent_name': 'Asia', 'country_code': 'IR', 'country_name': 'Iran', 'time_zone': 'Asia/Tehran', ...}
 ```
 

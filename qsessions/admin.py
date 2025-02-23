@@ -85,11 +85,11 @@ class SessionAdmin(admin.ModelAdmin):
         )
 
     @admin.display(description=_("Is valid"), boolean=True)
-    def is_valid(self, obj):
+    def is_valid(self, obj: Session):
         return obj.expire_date > now()
 
     @admin.display(description=_("Session data"))
-    def session_data_decoded(self, obj):
+    def session_data_decoded(self, obj: Session):
         return format_html(
             '<pre style="white-space: pre-wrap; max-width: 800px; display: inline-block; direction: ltr;">{}</pre>',
             pformat(obj.get_decoded()),
