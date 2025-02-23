@@ -1,6 +1,6 @@
 # Unreleased
 
-- Add support for Python 3.13.
+- Add support for Python 3.13 and drop support for Python 3.8.
 
 Backward-incompatible changes:
 
