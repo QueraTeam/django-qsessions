@@ -180,14 +180,14 @@ Get IP and user agent:
 Get user device (parsed user-agent string):
 
 ```python
->>> str(session.device())
-'K / Android 10 / Chrome Mobile 118.0.0'
->>> session.device().device
+>>> session.device
+'K / Android 10 / Chrome Mobile 118.0.0.0'
+>>> session.device_info.device
 Device(family='K', brand='Generic_Android', model='K')
->>> session.device().os
-OperatingSystem(family='Android', version=(10,), version_string='10')
->>> session.device().browser
-Browser(family='Chrome Mobile', version=(118, 0, 0), version_string='118.0.0')
+>>> session.device_info.os
+OS(family='Android', major='10', minor=None, patch=None, patch_minor=None)
+>>> session.device_info.user_agent
+UserAgent(family='Chrome Mobile', major='118', minor='0', patch='0', patch_minor='0')
 ```
 
 
@@ -211,9 +211,15 @@ Admin page:
 - `session.updated_at` is not the session's exact last activity. It's
   updated each time the session object is saved in DB. (e.g. when user
   logs in, or when ip, user agent, or session data changes)
-- **django-qsessions** extracts IP directly from the `REMOTE_ADDR` header.
-  If you are using a reverse proxy, you need to configure it to pass the
-  real IP address in the `REMOTE_ADDR` header.
+- The IP address is directly read from `request.META["REMOTE_ADDR"]`.
+  If you are using a reverse proxy,
+  you should configure it
+  to pass the real IP address in the `REMOTE_ADDR` header.
+  You can also write a custom middleware
+  to set `REMOTE_ADDR` from the value of other headers
+  (`X-Forwarded-For`, `X-Real-IP`, ...)
+  in a safe way suitable for your environment.
+  More info: [Why Django removed SetRemoteAddrFromForwardedFor](https://docs.djangoproject.com/en/5.2/releases/1.1/#removed-setremoteaddrfromforwardedfor-middleware).
 
 ## Development
 

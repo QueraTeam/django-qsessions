@@ -1,15 +1,26 @@
 # Unreleased
 
 - Add support for Python 3.13.
-- Remove **django-ipware** dependency to reduce the risk of IP spoofing.
-  (for the same reason Django
+
+Backward-incompatible changes:
+
+- The IP is now read directly from the value of `REMOTE_ADDR`
+  (instead of relying on **django-ipware**)
+  for the same reason Django
   [removed](https://docs.djangoproject.com/en/5.2/releases/1.1/#removed-setremoteaddrfromforwardedfor-middleware)
-  `SetRemoteAddrFromForwardedFor` in 1.1).
-  The IP is now extracted directly from the `REMOTE_ADDR` header.
-  Instead of relying on **django-ipware**
-  to extract the IP address from the request,
-  you should configure your web server
-  to pass the real IP address in the `REMOTE_ADDR` header.
+  `SetRemoteAddrFromForwardedFor` middleware in 1.1.
+  If you are using a reverse proxy,
+  you should configure it
+  to pass the real IP address in the `REMOTE_ADDR` header,
+  or you can write a custom version of
+  [`SetRemoteAddrFromForwardedFor` middleware](https://github.com/django/django/blob/91f18400cc0fb37659e2dbaab5484ff2081f1f30/django/middleware/http.py#L33)
+  which suits your environment.
+- `session.device` is now a property instead of a method and returns string.
+- The device object can be accessed using the new property `session.device_info`.
+- User agent parsing is now done using `ua-parser` instead of `user-agents`.
+  - The device object is now an instance of `ua_parser.core.Result`
+    instead of `user_agents.parsers.UserAgent`.
+
 
 # 1.1.5 (Jun 22, 2024)
 

@@ -1,3 +1,4 @@
+from functools import cached_property
 from importlib import import_module
 
 from django.conf import settings
@@ -70,13 +71,39 @@ class Session(AbstractBaseSession):
     def location_info(self):
         return geoip.ip_to_location_info(self.ip)
 
-    def device(self):
+    @cached_property
+    def device_info(self):
         """
         Describe the user agent of this session, if any
-        :rtype: user_agents.parsers.UserAgent | None
+        :rtype: ua_parser.core.Result | None
         """
         if self.user_agent:
-            import user_agents  # late import to avoid import cost
+            from ua_parser import parse  # late import to avoid import cost
 
-            return user_agents.parse(self.user_agent)
+            return parse(self.user_agent)
         return None
+
+    @cached_property
+    def device(self) -> str:
+        if device := self.device_info:
+
+            def get_version_string(version_info):
+                try:
+                    return ".".join(version_info[: version_info.index(None)])
+                except ValueError:
+                    return ".".join(version_info)
+
+            return "{device} / {os} / {browser}".format(
+                device=device.device.family if device.device else "Other",
+                os=(
+                    f"{device.os.family} {get_version_string([device.os.major, device.os.minor, device.os.patch, device.os.patch_minor])}"
+                    if device.os
+                    else "Other"
+                ),
+                browser=(
+                    f"{device.user_agent.family} {get_version_string([device.user_agent.major, device.user_agent.minor, device.user_agent.patch, device.user_agent.patch_minor])}"
+                    if device.user_agent
+                    else "Other"
+                ),
+            )
+        return ""

@@ -28,7 +28,7 @@ setup(
     license="MIT",
     packages=find_packages(".", include=("qsessions", "qsessions.*")),
     include_package_data=True,
-    install_requires=["Django >= 4.2", "user-agents>=1.1.0"],
+    install_requires=["Django >= 4.2", "ua-parser[regex] >= 1.0.1"],
     extras_require={"dev": dev_requirements},
     tests_require=dev_requirements,
     classifiers=[

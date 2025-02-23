@@ -59,9 +59,9 @@ def test_device():
             "Chrome/70.0.3538.102 Safari/537.36"
         )
     )
-    device = session.device()
+    device = session.device_info
     assert device.os.family == "Mac OS X"
-    assert device.browser.family == "Chrome"
+    assert device.user_agent.family == "Chrome"
 
 
 @pytest.mark.django_db
