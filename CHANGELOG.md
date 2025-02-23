@@ -1,10 +1,15 @@
+# Unreleased
+
+- Add support for Python 3.13.  
+
 # 1.1.5 (Jun 22, 2024)
 
 - Add support for Python 3.12 and drop support for Python 3.7.
 - Add support for Django 4.2, 5.0 and drop support for Django 3.2, 4.1.
 - Fix a bug in admin ("add" and "edit" session).
+- **Nov 3, 2024:** Add support for Django 5.1.
 
-Thanks [@ataylor32](https://github.com/ataylor32)
+Thanks [@ataylor32](https://github.com/ataylor32), [@browniebroke](https://github.com/browniebroke)
 
 # 1.1.4 (Sep 11, 2022)
 
