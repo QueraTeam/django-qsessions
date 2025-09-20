@@ -1,3 +1,7 @@
+# UNRELEASED
+
+- Make `geoip2` an optional dependency. It can be installed using the `geoip2` extra.
+
 # 2.0.0 (Feb 23, 2025)
 
 - Add support for Python 3.13 and drop support for Python 3.8.
