@@ -10,11 +10,12 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 dev_requirements = [
     "pre-commit",
-    "geoip2",  # for testing GeoIP2
     "pytest>=7",
     "pytest-cov",
     "pytest-django",
 ]
+
+geoip_requirements = ["geoip2>=4.1.0"]
 
 setup(
     name="django-qsessions",
@@ -29,7 +30,10 @@ setup(
     packages=find_packages(".", include=("qsessions", "qsessions.*")),
     include_package_data=True,
     install_requires=["Django >= 4.2", "ua-parser[regex] >= 1.0.1"],
-    extras_require={"dev": dev_requirements},
+    extras_require={
+        "dev": dev_requirements + geoip_requirements,
+        "geoip2": geoip_requirements,
+    },
     tests_require=dev_requirements,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
