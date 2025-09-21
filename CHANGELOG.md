@@ -1,4 +1,4 @@
-# UNRELEASED
+# 2.1.0 (Sep 21, 2025)
 
 - Make `geoip2` an optional dependency. It can be installed using the `geoip2` extra.
 
