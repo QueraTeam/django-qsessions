@@ -1,5 +1,6 @@
 # 2.1.0 (Sep 21, 2025)
 
+- Add support for Django 5.2.
 - Make `geoip2` an optional dependency. It can be installed using the `geoip2` extra.
 
 # 2.0.0 (Feb 23, 2025)
