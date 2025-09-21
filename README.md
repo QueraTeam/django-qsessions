@@ -115,22 +115,25 @@ migration script.
     python manage.py migrate qsessions
     ```
 
-To enable location detection using GeoIP2 (optional):
+### Use GeoIP2 (optional)
 
-5.  Install `geoip2` package:
+To enable location detection using GeoIP2, you'll need to follow a few extra steps:
+
+1.  Install `django-qsessions` with the `geoip2` extra:
 
     ```sh
-    pip install geoip2
+    pip install "django-qsessions[geoip2]"
     ```
 
-6.  Set `GEOIP_PATH` to a directory for storing GeoIP2 database.
+2.  Set `GEOIP_PATH` to a directory in Django settings for storing GeoIP2
+    database.
 
-7.  Run the following command to download latest GeoIP2 database. You
-    can add this command to a cron job to update GeoIP2 DB
+3.  Run the following command to download the latest GeoIP2 database. You
+    can add this command to a cron job to update the GeoIP2 DB
     automatically. Due to [Maxmind license
-    changes](https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases/)
+    changes](https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases/),
     you will need to acquire and use a license key for downloading the
-    databases. You can pass the key on the command line, or in the
+    databases. You can pass the key on the command line or in the
     `MAXMIND_LICENSE_KEY` environment variable.
 
     ```sh
