@@ -80,9 +80,8 @@ cached_db), and django-qsessions.
 
 ## Installation
 
-If your system is in production and there are active sessions using
-another session backend, you need to migrate them manually. We have no
-migration script.
+To keep existing database-backed sessions when switching from Django's
+`db` or `cached_db` backend, follow the migration steps below.
 
 1.  If you want to use the `cached_db` backend, make sure you've
     [configured your
@@ -114,6 +113,27 @@ migration script.
     ```sh
     python manage.py migrate qsessions
     ```
+
+### Migrating existing Django sessions
+
+Before changing the session engine or middleware in step 3, add
+`qsessions` to `INSTALLED_APPS` alongside `django.contrib.sessions`.
+Pause requests and workers that write sessions, then run:
+
+```sh
+python manage.py migrate qsessions
+python manage.py migratesessions
+```
+
+The command copies unexpired sessions from Django's session table. It keeps
+their keys, data and expiry dates, and associates logged-in sessions with
+their users. Sessions for deleted users are skipped. IP and user agent are
+filled in on subsequent requests.
+
+Existing QSessions rows are kept, so an interrupted copy can be rerun while
+writes are paused. Finish step 3 before resuming traffic. The original table
+is left intact. Running the migration again after cutover could restore
+sessions that have since been logged out.
 
 ### Use GeoIP2 (optional)
 
